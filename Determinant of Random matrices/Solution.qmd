@@ -1,0 +1,90 @@
+---
+title: Solution to finding expected value of Determinant of Random matrix
+authors:
+  - name: Anubhav Prakash
+---
+
+This is an easy one. In the GitHub folder for this puzzle, I have uploaded a histogram of 1e6 values of the determinants which indicates the distribution of the determinant and it is pretty evident that the mean is 0.
+
+The answer is a very general one, infact any nxn matrix whose each element is i.i.d. random variables, then the determinant has expected value 0. I present two approaches to theoretically arrive at the answer.
+
+---
+
+Consider an $n \times n$ random matrix
+$$
+A = [a_{i,j}]
+$$
+whose entries are i.i.d. random variables drawn from some distribution with finite mean and variance. Denote
+$$
+\mu = \mathbb{E}[a_{i,j}]
+$$
+for any $(i,j)$.
+
+---
+
+### Mathematical Argument (Leibniz Expansion)
+
+From the Leibniz formula, the determinant can be written as
+$$
+\det(A) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
+\prod_{i=1}^n a_{i, \sigma(i)},
+$$
+where $S_n$  is the symmetric group on $n$ elements, and $\operatorname{sgn}(\sigma)$ is the signature of permutation $\sigma$.
+
+Taking expectations:
+$$
+\mathbb{E}[\det(A)] =
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
+\mathbb{E}\left[
+\prod_{i=1}^n a_{i,\sigma(i)}
+\right].
+$$
+Since the entries are i.i.d., their expectations factorize:
+$$
+\mathbb{E}\left[
+\prod_{i=1}^n a_{i,\sigma(i)}
+\right]
+= \prod_{i=1}^n \mathbb{E}[a_{i,\sigma(i)}]
+= \mu^n.
+$$
+Hence
+$$
+\mathbb{E}[\det(A)] = \mu^n
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma).
+$$
+But
+$$
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) = 0
+$$
+since exactly half of the permutations are even and half are odd. Therefore
+$$
+\boxed{
+\mathbb{E}[\det(A)] = 0
+}.
+$$
+
+---
+
+### Symmetry Argument (Row Exchange Invariance)
+
+Alternatively, note that the rows of $A$ are i.i.d., so their joint distribution is *exchangeable* — any permutation of the rows leaves the distribution of $A$ unchanged.
+
+However, the determinant is an *alternating* function of its rows: permuting two rows flips the sign of the determinant. That means for any random matrix
+$$
+\det(A) \overset{d}{=} -\det(A)
+$$
+by randomly permuting two rows.
+
+Taking expectations on both sides gives
+$$
+\mathbb{E}[\det(A)] = \mathbb{E}[-\det(A)] = -\mathbb{E}[\det(A)].
+$$
+This forces
+$$
+\boxed{
+\mathbb{E}[\det(A)] = 0
+}.
+$$
+
+---
+
