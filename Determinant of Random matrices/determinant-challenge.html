@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Puzzles in R – Solutions to Puzzles in R</title>
+<title>Solution to finding expected value of Determinant of Random matrix – Solutions to Puzzles in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -78,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Solutions to Puzzles in R</span>
     </a>
   </div>
@@ -89,15 +118,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Determinant-Challenge/index.html"> 
+    <a class="nav-link" href="../Determinant-Challenge/index.html"> 
 <span class="menu-text">Determinant Challenge</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Direction-Change/index.html"> 
+    <a class="nav-link" href="../Direction-Change/index.html"> 
 <span class="menu-text">Direction Change Puzzle</span></a>
   </li>  
 </ul>
@@ -116,7 +145,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#directory-for-solutions-to-puzzles-in-r" id="toc-directory-for-solutions-to-puzzles-in-r" class="nav-link active" data-scroll-target="#directory-for-solutions-to-puzzles-in-r">Directory for solutions to Puzzles in R</a></li>
+  <li><a href="#mathematical-argument-leibniz-expansion" id="toc-mathematical-argument-leibniz-expansion" class="nav-link active" data-scroll-target="#mathematical-argument-leibniz-expansion">Mathematical Argument (Leibniz Expansion)</a></li>
+  <li><a href="#symmetry-argument-row-exchange-invariance" id="toc-symmetry-argument-row-exchange-invariance" class="nav-link" data-scroll-target="#symmetry-argument-row-exchange-invariance">Symmetry Argument (Row Exchange Invariance)</a></li>
   </ul>
 </nav>
     </div>
@@ -125,13 +155,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Puzzles in R</h1>
+<h1 class="title">Solution to finding expected value of Determinant of Random matrix</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anubhav Prakash </p>
+          </div>
+  </div>
     
   
     
@@ -142,12 +178,59 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="directory-for-solutions-to-puzzles-in-r" class="level1">
-<h1>Directory for solutions to Puzzles in R</h1>
-<ul>
-<li><a href="Determinant-Challenge/">Determinant Challenge</a></li>
-<li><a href="Direction-Change/">Direction Change Puzzle</a></li>
-</ul>
+<p>This is an easy one. In the GitHub folder for this puzzle, I have uploaded a histogram of 1e6 values of the determinants which indicates the distribution of the determinant and it is pretty evident that the mean is 0.</p>
+<p>The answer is a very general one, infact any nxn matrix whose each element is i.i.d. random variables, then the determinant has expected value 0. I present two approaches to theoretically arrive at the answer.</p>
+<hr>
+<p>Consider an <span class="math inline">\(n \times n\)</span> random matrix <span class="math display">\[
+A = [a_{i,j}]
+\]</span> whose entries are i.i.d. random variables drawn from some distribution with finite mean and variance. Denote <span class="math display">\[
+\mu = \mathbb{E}[a_{i,j}]
+\]</span> for any <span class="math inline">\((i,j)\)</span>.</p>
+<hr>
+<section id="mathematical-argument-leibniz-expansion" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-argument-leibniz-expansion">Mathematical Argument (Leibniz Expansion)</h3>
+<p>From the Leibniz formula, the determinant can be written as <span class="math display">\[
+\det(A) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
+\prod_{i=1}^n a_{i, \sigma(i)},
+\]</span> where <span class="math inline">\(S_n\)</span> is the symmetric group on <span class="math inline">\(n\)</span> elements, and <span class="math inline">\(\operatorname{sgn}(\sigma)\)</span> is the signature of permutation <span class="math inline">\(\sigma\)</span>.</p>
+<p>Taking expectations: <span class="math display">\[
+\mathbb{E}[\det(A)] =
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
+\mathbb{E}\left[
+\prod_{i=1}^n a_{i,\sigma(i)}
+\right].
+\]</span> Since the entries are i.i.d., their expectations factorize: <span class="math display">\[
+\mathbb{E}\left[
+\prod_{i=1}^n a_{i,\sigma(i)}
+\right]
+= \prod_{i=1}^n \mathbb{E}[a_{i,\sigma(i)}]
+= \mu^n.
+\]</span> Hence <span class="math display">\[
+\mathbb{E}[\det(A)] = \mu^n
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma).
+\]</span> But <span class="math display">\[
+\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) = 0
+\]</span> since exactly half of the permutations are even and half are odd. Therefore <span class="math display">\[
+\boxed{
+\mathbb{E}[\det(A)] = 0
+}.
+\]</span></p>
+<hr>
+</section>
+<section id="symmetry-argument-row-exchange-invariance" class="level3">
+<h3 class="anchored" data-anchor-id="symmetry-argument-row-exchange-invariance">Symmetry Argument (Row Exchange Invariance)</h3>
+<p>Alternatively, note that the rows of <span class="math inline">\(A\)</span> are i.i.d., so their joint distribution is <em>exchangeable</em> — any permutation of the rows leaves the distribution of <span class="math inline">\(A\)</span> unchanged.</p>
+<p>However, the determinant is an <em>alternating</em> function of its rows: permuting two rows flips the sign of the determinant. That means for any random matrix <span class="math display">\[
+\det(A) \overset{d}{=} -\det(A)
+\]</span> by randomly permuting two rows.</p>
+<p>Taking expectations on both sides gives <span class="math display">\[
+\mathbb{E}[\det(A)] = \mathbb{E}[-\det(A)] = -\mathbb{E}[\det(A)].
+\]</span> This forces <span class="math display">\[
+\boxed{
+\mathbb{E}[\det(A)] = 0
+}.
+\]</span></p>
+<hr>
 
 
 </section>
