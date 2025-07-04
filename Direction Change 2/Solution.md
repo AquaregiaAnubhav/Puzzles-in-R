@@ -1,0 +1,35 @@
+# Solution
+
+When you **change direction**, for example if you were initially moving right, you then switch to moving up (and vice versa).  
+However, if you change direction **twice**, you end up facing the **same** direction you started with.  
+
+Therefore, after an **odd** number of direction changes, you will be facing a **different** direction from the one you began with.  
+
+---
+
+Let us place the \(n \times n\) lattice in the positive quadrant of the \(xy\)-plane, with lattice points labeled \((0,0), (0,1), (1,0), \dots, (n,n)\).
+
+- If your first step is **rightwards**, i.e. from \((0,0)\) to \((1,0)\), then after an odd number of direction changes, your **final** step must be upwards, going from \((n,n-1)\) to \((n,n)\).
+- Similarly, if your first step is **upwards**, i.e. from \((0,0)\) to \((0,1)\), then after an odd number of direction changes your **final** step must be rightwards, going from \((n-1,n)\) to \((n,n)\).
+
+So the total number of paths with an odd number of direction changes is the sum of:
+
+- the number of paths from \((1,0)\) to \((n,n-1)\), and  
+- the number of paths from \((0,1)\) to \((n-1,n)\).
+
+Each of these counts is \(\binom{2n-2}{n-1}\), so their total is
+\[
+2 \times \binom{2n-2}{n-1}.
+\]
+  
+The total number of possible paths across the entire lattice is
+\[
+\binom{2n}{n}.
+\]
+
+Hence, the required probability of picking a random path with an odd number of direction changes is
+\[
+\boxed{
+\frac{2 \binom{2n-2}{n-1}}{\binom{2n}{n}} = \frac{n}{2n - 1}
+}.
+\]
