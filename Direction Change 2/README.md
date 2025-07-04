@@ -21,3 +21,5 @@ If you choose one of these valid paths uniformly at random, what is the **probab
 
 **Source:**  
 [YouTube: Citadel Interview question : Direction Change II by QuantProf](https://www.youtube.com/watch?v=PbmM-k00GiM)
+
+[**Solution**](https://aquaregiaanubhav.github.io/Puzzles-in-R/direction-change.html)
