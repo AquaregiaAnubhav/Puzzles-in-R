@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Solution to finding expected value of Determinant of Random matrix – Determinant Puzzle</title>
+<title>Probability of odd numbers of direction change paths in 8x8 grid – Probability of odd number of direction changes in an nxn grid</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Determinant Puzzle</span>
+    <span class="navbar-title">Probability of odd number of direction changes in an nxn grid</span>
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
@@ -133,7 +133,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Solution to finding expected value of Determinant of Random matrix</h1>
+<h1 class="title">Probability of odd numbers of direction change paths in 8x8 grid</h1>
 </div>
 
 
@@ -156,62 +156,34 @@ window.Quarto = {
 </header>
 
 
-<p>This is an easy one. In the GitHub folder for this puzzle, I have uploaded a histogram of 1e6 values of the determinants which indicates the distribution of the determinant and it is pretty evident that the mean is 0.</p>
-<p>The answer is a very general one, infact any nxn matrix whose each element is i.i.d. random variables, then the determinant has expected value 0. I present two approaches to theoretically arrive at the answer.</p>
+<p>When you <strong>change direction</strong>, for example if you were initially moving right, you then switch to moving up (and vice versa).<br>
+However, if you change direction <strong>twice</strong>, you end up facing the <strong>same</strong> direction you started with.</p>
+<p>Therefore, after an <strong>odd</strong> number of direction changes, you will be facing a <strong>different</strong> direction from the one you began with.</p>
 <hr>
-<p>Consider an <span class="math inline">\(n \times n\)</span> random matrix <span class="math display">\[
-A = [a_{i,j}]
-\]</span> whose entries are i.i.d. random variables drawn from some distribution with finite mean and variance. Denote <span class="math display">\[
-\mu = \mathbb{E}[a_{i,j}]
-\]</span> for any <span class="math inline">\((i,j)\)</span>.</p>
-<hr>
-<section id="mathematical-argument-leibniz-expansion" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-argument-leibniz-expansion">Mathematical Argument (Leibniz Expansion)</h3>
-<p>From the Leibniz formula, the determinant can be written as <span class="math display">\[
-\det(A) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
-\prod_{i=1}^n a_{i, \sigma(i)},
-\]</span> where <span class="math inline">\(S_n\)</span> is the symmetric group on <span class="math inline">\(n\)</span> elements, and <span class="math inline">\(\operatorname{sgn}(\sigma)\)</span> is the signature of permutation <span class="math inline">\(\sigma\)</span>.</p>
-<p>Taking expectations: <span class="math display">\[
-\mathbb{E}[\det(A)] =
-\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma)
-\mathbb{E}\left[
-\prod_{i=1}^n a_{i,\sigma(i)}
-\right].
-\]</span> Since the entries are i.i.d., their expectations factorize: <span class="math display">\[
-\mathbb{E}\left[
-\prod_{i=1}^n a_{i,\sigma(i)}
-\right]
-= \prod_{i=1}^n \mathbb{E}[a_{i,\sigma(i)}]
-= \mu^n.
-\]</span> Hence <span class="math display">\[
-\mathbb{E}[\det(A)] = \mu^n
-\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma).
-\]</span> But <span class="math display">\[
-\sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) = 0
-\]</span> since exactly half of the permutations are even and half are odd. Therefore <span class="math display">\[
+<p>Let us place the <span class="math inline">\(n \times n\)</span> lattice in the positive quadrant of the <span class="math inline">\(xy\)</span>-plane, with lattice points labeled <span class="math inline">\((0,0), (0,1), (1,0), \dots, (n,n)\)</span>.</p>
+<ul>
+<li>If your first step is <strong>rightwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((1,0)\)</span>, then after an odd number of direction changes, your <strong>final</strong> step must be upwards, going from <span class="math inline">\((n,n-1)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
+<li>Similarly, if your first step is <strong>upwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((0,1)\)</span>, then after an odd number of direction changes your <strong>final</strong> step must be rightwards, going from <span class="math inline">\((n-1,n)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
+</ul>
+<p>So the total number of paths with an odd number of direction changes is the sum of:</p>
+<ul>
+<li>the number of paths from <span class="math inline">\((1,0)\)</span> to <span class="math inline">\((n,n-1)\)</span>, and<br>
+</li>
+<li>the number of paths from <span class="math inline">\((0,1)\)</span> to <span class="math inline">\((n-1,n)\)</span>.</li>
+</ul>
+<p>Each of these counts is <span class="math inline">\(\binom{2n-2}{n-1}\)</span>, so their total is <span class="math display">\[
+2 \times \binom{2n-2}{n-1}.
+\]</span></p>
+<p>The total number of possible paths across the entire lattice is <span class="math display">\[
+\binom{2n}{n}.
+\]</span></p>
+<p>Hence, the required probability of picking a random path with an odd number of direction changes is <span class="math display">\[
 \boxed{
-\mathbb{E}[\det(A)] = 0
+\frac{2 \binom{2n-2}{n-1}}{\binom{2n}{n}} = \frac{n}{2n - 1}
 }.
 \]</span></p>
-<hr>
-</section>
-<section id="symmetry-argument-row-exchange-invariance" class="level3">
-<h3 class="anchored" data-anchor-id="symmetry-argument-row-exchange-invariance">Symmetry Argument (Row Exchange Invariance)</h3>
-<p>Alternatively, note that the rows of <span class="math inline">\(A\)</span> are i.i.d., so their joint distribution is <em>exchangeable</em> — any permutation of the rows leaves the distribution of <span class="math inline">\(A\)</span> unchanged.</p>
-<p>However, the determinant is an <em>alternating</em> function of its rows: permuting two rows flips the sign of the determinant. That means for any random matrix <span class="math display">\[
-\det(A) \overset{d}{=} -\det(A)
-\]</span> by randomly permuting two rows.</p>
-<p>Taking expectations on both sides gives <span class="math display">\[
-\mathbb{E}[\det(A)] = \mathbb{E}[-\det(A)] = -\mathbb{E}[\det(A)].
-\]</span> This forces <span class="math display">\[
-\boxed{
-\mathbb{E}[\det(A)] = 0
-}.
-\]</span></p>
-<hr>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
