@@ -155,6 +155,7 @@ window.Quarto = {
   <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
   <li><a href="#parity-consistency-and-the-last-cell" id="toc-parity-consistency-and-the-last-cell" class="nav-link" data-scroll-target="#parity-consistency-and-the-last-cell">Parity Consistency and the Last Cell</a></li>
   <li><a href="#counting-final-probability" id="toc-counting-final-probability" class="nav-link" data-scroll-target="#counting-final-probability">Counting &amp; Final Probability</a></li>
+  <li><a href="#why-worry-about-blue-red-parities" id="toc-why-worry-about-blue-red-parities" class="nav-link" data-scroll-target="#why-worry-about-blue-red-parities">Why Worry About Blue &amp; Red Parities?</a></li>
   <li><a href="#final-answer" id="toc-final-answer" class="nav-link" data-scroll-target="#final-answer">Final Answer</a></li>
   </ul>
 </nav>
@@ -194,13 +195,15 @@ window.Quarto = {
 </section>
 <section id="diagram-regions" class="level1">
 <h1>Diagram &amp; Regions</h1>
-<p>Below is the board partitioned into three regions:</p>
+<p>Below is the board partitioned into four regions:</p>
 <ul>
 <li><strong>Green region</strong>: the top 7×7 sub-board<br>
 </li>
 <li><strong>Blue region</strong>: the 1×7 strip on the right of the top 7 rows<br>
 </li>
-<li><strong>Red region</strong>: the 1×8 strip at the bottom</li>
+<li><strong>Red region</strong>: the 1×7 strip at the bottom<br>
+</li>
+<li>The last left bottom corner cell</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -217,18 +220,18 @@ window.Quarto = {
 <h1>Key Insight</h1>
 <ol type="1">
 <li><p><strong>Green block parity</strong><br>
-Fix all 49 cells of the green 7×7 block arbitrarily. For each row <span class="math inline">\(i=1,\dots,7\)</span>, let<br>
+Fix all 49 cells of the green 7×7 block arbitrarily. For each row (i=1,,7), let<br>
 <span class="math display">\[p_i = \sum_{j=1}^7 \text{green}(i,j) \bmod 2,\]</span><br>
-and for each column <span class="math inline">\(j=1,\dots,7\)</span>, let<br>
+and for each column (j=1,,7), let<br>
 <span class="math display">\[q_j = \sum_{i=1}^7 \text{green}(i,j) \bmod 2.\]</span><br>
-Each <span class="math inline">\(p_i,q_j\in\{0,1\}\)</span> indicates odd (1) or even (0) parity in that row or column of the green region.</p></li>
+Each (p_i,q_j{0,1}) indicates odd (1) or even (0) parity in that row or column of the green region.</p></li>
 <li><p><strong>Blue strip correction</strong><br>
-To correct row <span class="math inline">\(i\)</span> parity, set the blue cell at <span class="math inline">\((i,8)\)</span> to <span class="math inline">\(p_i\)</span>. Since toggling by 1 flips parity, this uniquely enforces evenness: <span class="math display">\[
+To correct row (i) parity, set the blue cell at ((i,8)) to (p_i). Since toggling by 1 flips parity, this uniquely enforces evenness: <span class="math display">\[
   \text{blue}(i,8) = p_i,
   \quad i=1,\dots,7.
 \]</span></p></li>
 <li><p><strong>Red strip correction</strong><br>
-After placing the blues, each column <span class="math inline">\(j=1,\dots,7\)</span> still has parity <span class="math inline">\(q_j\)</span>. To enforce evenness there, set: <span class="math display">\[
+After placing the blues, each column (j=1,,7) still has parity (q_j). To enforce evenness there, set: <span class="math display">\[
   \text{red}(8,j) = q_j,
   \quad j=1,\dots,7.
 \]</span></p></li>
@@ -237,11 +240,11 @@ After placing the blues, each column <span class="math inline">\(j=1,\dots,7\)</
 </section>
 <section id="parity-consistency-and-the-last-cell" class="level1">
 <h1>Parity Consistency and the Last Cell</h1>
-<p>Before choosing <span class="math inline">\((8,8)\)</span>:</p>
+<p>Before choosing ((8,8)):</p>
 <ul>
-<li><strong>Row&nbsp;8 parity</strong> is<br>
+<li><strong>Row 8 parity</strong> is<br>
 <span class="math display">\[r_8 = \sum_{j=1}^7 \text{red}(8,j) \bmod 2 = \sum_{j=1}^7 q_j \bmod 2.\]</span></li>
-<li><strong>Column&nbsp;8 parity</strong> is<br>
+<li><strong>Column 8 parity</strong> is<br>
 <span class="math display">\[c_8 = \sum_{i=1}^7 \text{blue}(i,8) \bmod 2 = \sum_{i=1}^7 p_i \bmod 2.\]</span></li>
 </ul>
 <p>By exchanging sums, <span class="math display">\[
@@ -250,7 +253,7 @@ After placing the blues, each column <span class="math inline">\(j=1,\dots,7\)</
   = \sum_{j=1}^7 \sum_{i=1}^7 \text{green}(i,j) \bmod 2
   = \sum_{j=1}^7 q_j.
 \]</span></p>
-<p>Hence <span class="math inline">\(r_8 = c_8\)</span>. A single choice of <span class="math inline">\((8,8)\)</span>, <span class="math display">\[
+<p>Hence (r_8 = c_8). A single choice of ((8,8)), <span class="math display">\[
   \text{cell}(8,8) = r_8 = c_8,
 \]</span> simultaneously fixes both final parities to even.</p>
 <hr>
@@ -258,18 +261,28 @@ After placing the blues, each column <span class="math inline">\(j=1,\dots,7\)</
 <section id="counting-final-probability" class="level1">
 <h1>Counting &amp; Final Probability</h1>
 <ul>
-<li><strong>Green block</strong>: <span class="math inline">\(2^{49}\)</span> arbitrary patterns.<br>
+<li><strong>Green block</strong>: (2^{49}) arbitrary patterns.<br>
 </li>
-<li><strong>Blue strip</strong>: forced choices (<span class="math inline">\(\times1^7\)</span>).<br>
+<li><strong>Blue strip</strong>: forced choices ((^7)).<br>
 </li>
-<li><strong>Red strip</strong>: forced choices (<span class="math inline">\(\times1^7\)</span>).<br>
+<li><strong>Red strip</strong>: forced choices ((^7)).<br>
 </li>
-<li><strong>Last cell</strong>: forced (<span class="math inline">\(\times1\)</span>).</li>
+<li><strong>Last cell</strong>: forced (()).</li>
 </ul>
-<p>Total valid boards: <span class="math inline">\(2^{49}\)</span>. Of the <span class="math inline">\(2^{64}\)</span> total,<br>
+<p>Total valid boards: (2^{49}). Of the (2^{64}) total,<br>
 <span class="math display">\[
 \text{Probability} = \frac{2^{49}}{2^{64}} = 2^{-15} \approx 3.05\times10^{-5}.
 \]</span></p>
+<hr>
+</section>
+<section id="why-worry-about-blue-red-parities" class="level1">
+<h1>Why Worry About Blue &amp; Red Parities?</h1>
+<ul>
+<li><strong>Rows first, columns second</strong> is <em>not</em> symmetrical, so one might fear the two parity-fixing operations could clash.<br>
+</li>
+<li>The “swap-the-sum” identity guarantees they never clash: correcting rows with the blue strip automatically makes the <em>total</em> column parity defect equal to the <em>total</em> row parity defect, so a <em>single</em> marble can finish the job.</li>
+</ul>
+<p>In linear-algebra terms, the 8 row parities + 8 column parities give 16 constraints, but only 15 are independent. Once 15 are satisfied, the last follows automatically—this is why the lone corner cell can resolve both at once.</p>
 <hr>
 </section>
 <section id="final-answer" class="level1">
