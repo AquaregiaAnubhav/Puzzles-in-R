@@ -11,6 +11,8 @@ website:
         href: Determinant_of_Random_matrices/index.html
       - text: "Direction Change Puzzle"
         href: Direction_Change_2/index.html
+      - text: "Even–Marbles Puzzle"         
+        href: Even_Marbles/index.html       
   page-navigation: false
 
 format:

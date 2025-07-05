@@ -14,7 +14,7 @@ generate_n_mat <- function(n){
 
 average_det <- function(matrices){ #Takes the average of determinants of n random matrices
   print(mean(sapply(matrices, det)))
-  # return(sapply(matrices, det))
+  # return(sapply(matrices, det)) #was for generating histogram of det values to find the shape of distribution
 }
 
 n <- 1000000 #larger n, better approximation
