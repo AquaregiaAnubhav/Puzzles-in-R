@@ -1,0 +1,7 @@
+/.quarto/
+_site/
+.Rhistory
+index_files/
+*.js
+*.css
+*.woff

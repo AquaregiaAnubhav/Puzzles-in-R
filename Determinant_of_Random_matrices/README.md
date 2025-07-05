@@ -7,4 +7,4 @@ What is the **expected value** of the determinant of such a randomly generated m
 ---
 
 **Source**: [YouTube video](https://www.youtube.com/watch?v=PbmM-k00GiM&t=144s)  
-**Solution (nicely rendered)**: [View here](https://aquaregiaanubhav.github.io/Puzzles-in-R/determinant-challenge.html)
+**Solution (nicely rendered)**: [View here](https://aquaregiaanubhav.github.io/Puzzles-in-R/Determinant_of_Random_matrices/index.html)

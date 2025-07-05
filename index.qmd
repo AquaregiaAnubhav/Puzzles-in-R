@@ -1,0 +1,10 @@
+---
+title: "Puzzles in R"
+format: html
+---
+
+# Directory for solutions to Puzzles in R
+
+- [Determinant Challenge](Determinant_of_Random_matrices/index.html)
+- [Direction Change Puzzle](Direction_Change_2/index.html)
+

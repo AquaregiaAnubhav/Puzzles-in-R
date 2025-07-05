@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "Solutions to Puzzles in R"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.html
+      - text: "Determinant Challenge"
+        href: Determinant_of_Random_matrices/index.html
+      - text: "Direction Change Puzzle"
+        href: Direction_Change_2/index.html
+  page-navigation: false
+
+format:
+  html:
+    theme: default
+    toc: false

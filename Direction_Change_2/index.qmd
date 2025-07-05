@@ -3,7 +3,7 @@ title: Probability of odd numbers of direction change paths in 8x8 grid
 format: html
 authors:
   - name: Anubhav Prakash
-output-file: direction-change.html
+output-file: index.html
 ---
 
 

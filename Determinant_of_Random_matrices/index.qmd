@@ -1,7 +1,9 @@
 ---
 title: Solution to finding expected value of Determinant of Random matrix
+format: html
 authors:
   - name: Anubhav Prakash
+output-file: index.html
 ---
 
 This is an easy one. In the GitHub folder for this puzzle, I have uploaded a histogram of 1e6 values of the determinants which indicates the distribution of the determinant and it is pretty evident that the mean is 0.
