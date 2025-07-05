@@ -1,0 +1,112 @@
+---
+title: "Parity Puzzle on an 8×8 Board"
+author: "Anubhav Prakash"
+format:
+  html:
+    toc: true
+    theme: default
+    code-fold: true
+execute:
+  echo: false
+---
+
+# Problem Statement
+
+You have an **8×8** board. On each cell you place a black or white marble, independently and uniformly at random. What is the probability that **every row** and **every column** contains an **even** number of white marbles?
+
+---
+
+# Diagram & Regions
+
+Below is the board partitioned into four regions:
+
+- **Green region**: the top 7×7 sub-board  
+- **Blue region**: the 1×7 strip on the right of the top 7 rows  
+- **Red region**: the 1×7 strip at the bottom  
+- The last left bottom corner cell
+
+```{r}
+knitr::include_graphics("board_partition.png")
+```
+
+---
+
+# Key Insight
+
+1. **Green block parity**  
+   Fix all 49 cells of the green 7×7 block arbitrarily. For each row \(i=1,\dots,7\), let  
+   $$p_i = \sum_{j=1}^7 \text{green}(i,j) \bmod 2,$$  
+   and for each column \(j=1,\dots,7\), let  
+   $$q_j = \sum_{i=1}^7 \text{green}(i,j) \bmod 2.$$  
+   Each \(p_i,q_j\in\{0,1\}\) indicates odd (1) or even (0) parity in that row or column of the green region.
+
+2. **Blue strip correction**  
+   To correct row \(i\) parity, set the blue cell at \((i,8)\) to \(p_i\). Since toggling by 1 flips parity, this uniquely enforces evenness:
+   $$
+     \text{blue}(i,8) = p_i,
+     \quad i=1,\dots,7.
+   $$
+
+3. **Red strip correction**  
+   After placing the blues, each column \(j=1,\dots,7\) still has parity \(q_j\). To enforce evenness there, set:
+   $$
+     \text{red}(8,j) = q_j,
+     \quad j=1,\dots,7.
+   $$
+
+---
+
+# Parity Consistency and the Last Cell
+
+Before choosing \((8,8)\):
+
+- **Row 8 parity** is  
+  $$r_8 = \sum_{j=1}^7 \text{red}(8,j) \bmod 2 = \sum_{j=1}^7 q_j \bmod 2.$$
+- **Column 8 parity** is  
+  $$c_8 = \sum_{i=1}^7 \text{blue}(i,8) \bmod 2 = \sum_{i=1}^7 p_i \bmod 2.$$
+
+By exchanging sums,
+$$
+  \sum_{i=1}^7 p_i
+  = \sum_{i=1}^7 \sum_{j=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 \sum_{i=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 q_j.
+$$
+
+Hence \(r_8 = c_8\). A single choice of \((8,8)\),
+$$
+  \text{cell}(8,8) = r_8 = c_8,
+$$
+simultaneously fixes both final parities to even.
+
+---
+
+# Counting & Final Probability
+
+- **Green block**: \(2^{49}\) arbitrary patterns.  
+- **Blue strip**: forced choices (\(\times1^7\)).  
+- **Red strip**: forced choices (\(\times1^7\)).  
+- **Last cell**: forced (\(\times1\)).  
+
+Total valid boards: \(2^{49}\). Of the \(2^{64}\) total,  
+$$
+\text{Probability} = \frac{2^{49}}{2^{64}} = 2^{-15} \approx 3.05\times10^{-5}.
+$$
+
+---
+
+# Why Worry About Blue & Red Parities?
+
+- **Rows first, columns second** is *not* symmetrical, so one might fear the two parity-fixing operations could clash.  
+- The “swap-the-sum” identity guarantees they never clash: correcting rows with the blue strip automatically makes the *total* column parity defect equal to the *total* row parity defect, so a *single* marble can finish the job.
+
+In linear-algebra terms, the 8 row parities + 8 column parities give 16 constraints, but only 15 are independent.  Once 15 are satisfied, the last follows automatically—this is why the lone corner cell can resolve both at once.
+
+---
+
+# Final Answer
+
+**Probability** that every row and column has an even number of white marbles:  
+$$
+2^{-15}.
+$$
