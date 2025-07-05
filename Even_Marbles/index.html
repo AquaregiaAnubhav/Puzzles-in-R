@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Anubhav Prakash">
 
-<title>Probability of odd numbers of direction change paths in 8x8 grid – Solutions to Puzzles in R</title>
+<title>Parity Puzzle on an 8×8 Board – Solutions to Puzzles in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,7 +101,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,11 +127,11 @@ window.Quarto = {
 <span class="menu-text">Determinant Challenge</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../Direction_Change_2/index.html" aria-current="page"> 
+    <a class="nav-link" href="../Direction_Change_2/index.html"> 
 <span class="menu-text">Direction Change Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Even_Marbles/index.html"> 
+    <a class="nav-link active" href="../Even_Marbles/index.html" aria-current="page"> 
 <span class="menu-text">Even–Marbles Puzzle</span></a>
   </li>  
 </ul>
@@ -144,13 +145,26 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#diagram-regions" id="toc-diagram-regions" class="nav-link" data-scroll-target="#diagram-regions">Diagram &amp; Regions</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#parity-consistency-and-the-last-cell" id="toc-parity-consistency-and-the-last-cell" class="nav-link" data-scroll-target="#parity-consistency-and-the-last-cell">Parity Consistency and the Last Cell</a></li>
+  <li><a href="#counting-final-probability" id="toc-counting-final-probability" class="nav-link" data-scroll-target="#counting-final-probability">Counting &amp; Final Probability</a></li>
+  <li><a href="#final-answer" id="toc-final-answer" class="nav-link" data-scroll-target="#final-answer">Final Answer</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability of odd numbers of direction change paths in 8x8 grid</h1>
+<h1 class="title">Parity Puzzle on an 8×8 Board</h1>
 </div>
 
 
@@ -173,34 +187,100 @@ window.Quarto = {
 </header>
 
 
-<p>When you <strong>change direction</strong>, for example if you were initially moving right, you then switch to moving up (and vice versa).<br>
-However, if you change direction <strong>twice</strong>, you end up facing the <strong>same</strong> direction you started with.</p>
-<p>Therefore, after an <strong>odd</strong> number of direction changes, you will be facing a <strong>different</strong> direction from the one you began with.</p>
+<section id="problem-statement" class="level1">
+<h1>Problem Statement</h1>
+<p>You have an <strong>8×8</strong> board. On each cell you place a black or white marble, independently and uniformly at random. What is the probability that <strong>every row</strong> and <strong>every column</strong> contains an <strong>even</strong> number of white marbles?</p>
 <hr>
-<p>Let us place the <span class="math inline">\(n \times n\)</span> lattice in the positive quadrant of the <span class="math inline">\(xy\)</span>-plane, with lattice points labeled <span class="math inline">\((0,0), (0,1), (1,0), \dots, (n,n)\)</span>.</p>
+</section>
+<section id="diagram-regions" class="level1">
+<h1>Diagram &amp; Regions</h1>
+<p>Below is the board partitioned into three regions:</p>
 <ul>
-<li>If your first step is <strong>rightwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((1,0)\)</span>, then after an odd number of direction changes, your <strong>final</strong> step must be upwards, going from <span class="math inline">\((n,n-1)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
-<li>Similarly, if your first step is <strong>upwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((0,1)\)</span>, then after an odd number of direction changes your <strong>final</strong> step must be rightwards, going from <span class="math inline">\((n-1,n)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
-</ul>
-<p>So the total number of paths with an odd number of direction changes is the sum of:</p>
-<ul>
-<li>the number of paths from <span class="math inline">\((1,0)\)</span> to <span class="math inline">\((n,n-1)\)</span>, and<br>
+<li><strong>Green region</strong>: the top 7×7 sub-board<br>
 </li>
-<li>the number of paths from <span class="math inline">\((0,1)\)</span> to <span class="math inline">\((n-1,n)\)</span>.</li>
+<li><strong>Blue region</strong>: the 1×7 strip on the right of the top 7 rows<br>
+</li>
+<li><strong>Red region</strong>: the 1×8 strip at the bottom</li>
 </ul>
-<p>Each of these counts is <span class="math inline">\(\binom{2n-2}{n-1}\)</span>, so their total is <span class="math display">\[
-2 \times \binom{2n-2}{n-1}.
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="board_partition.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="key-insight" class="level1">
+<h1>Key Insight</h1>
+<ol type="1">
+<li><p><strong>Green block parity</strong><br>
+Fix all 49 cells of the green 7×7 block arbitrarily. For each row <span class="math inline">\(i=1,\dots,7\)</span>, let<br>
+<span class="math display">\[p_i = \sum_{j=1}^7 \text{green}(i,j) \bmod 2,\]</span><br>
+and for each column <span class="math inline">\(j=1,\dots,7\)</span>, let<br>
+<span class="math display">\[q_j = \sum_{i=1}^7 \text{green}(i,j) \bmod 2.\]</span><br>
+Each <span class="math inline">\(p_i,q_j\in\{0,1\}\)</span> indicates odd (1) or even (0) parity in that row or column of the green region.</p></li>
+<li><p><strong>Blue strip correction</strong><br>
+To correct row <span class="math inline">\(i\)</span> parity, set the blue cell at <span class="math inline">\((i,8)\)</span> to <span class="math inline">\(p_i\)</span>. Since toggling by 1 flips parity, this uniquely enforces evenness: <span class="math display">\[
+  \text{blue}(i,8) = p_i,
+  \quad i=1,\dots,7.
+\]</span></p></li>
+<li><p><strong>Red strip correction</strong><br>
+After placing the blues, each column <span class="math inline">\(j=1,\dots,7\)</span> still has parity <span class="math inline">\(q_j\)</span>. To enforce evenness there, set: <span class="math display">\[
+  \text{red}(8,j) = q_j,
+  \quad j=1,\dots,7.
+\]</span></p></li>
+</ol>
+<hr>
+</section>
+<section id="parity-consistency-and-the-last-cell" class="level1">
+<h1>Parity Consistency and the Last Cell</h1>
+<p>Before choosing <span class="math inline">\((8,8)\)</span>:</p>
+<ul>
+<li><strong>Row&nbsp;8 parity</strong> is<br>
+<span class="math display">\[r_8 = \sum_{j=1}^7 \text{red}(8,j) \bmod 2 = \sum_{j=1}^7 q_j \bmod 2.\]</span></li>
+<li><strong>Column&nbsp;8 parity</strong> is<br>
+<span class="math display">\[c_8 = \sum_{i=1}^7 \text{blue}(i,8) \bmod 2 = \sum_{i=1}^7 p_i \bmod 2.\]</span></li>
+</ul>
+<p>By exchanging sums, <span class="math display">\[
+  \sum_{i=1}^7 p_i
+  = \sum_{i=1}^7 \sum_{j=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 \sum_{i=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 q_j.
 \]</span></p>
-<p>The total number of possible paths across the entire lattice is <span class="math display">\[
-\binom{2n}{n}.
+<p>Hence <span class="math inline">\(r_8 = c_8\)</span>. A single choice of <span class="math inline">\((8,8)\)</span>, <span class="math display">\[
+  \text{cell}(8,8) = r_8 = c_8,
+\]</span> simultaneously fixes both final parities to even.</p>
+<hr>
+</section>
+<section id="counting-final-probability" class="level1">
+<h1>Counting &amp; Final Probability</h1>
+<ul>
+<li><strong>Green block</strong>: <span class="math inline">\(2^{49}\)</span> arbitrary patterns.<br>
+</li>
+<li><strong>Blue strip</strong>: forced choices (<span class="math inline">\(\times1^7\)</span>).<br>
+</li>
+<li><strong>Red strip</strong>: forced choices (<span class="math inline">\(\times1^7\)</span>).<br>
+</li>
+<li><strong>Last cell</strong>: forced (<span class="math inline">\(\times1\)</span>).</li>
+</ul>
+<p>Total valid boards: <span class="math inline">\(2^{49}\)</span>. Of the <span class="math inline">\(2^{64}\)</span> total,<br>
+<span class="math display">\[
+\text{Probability} = \frac{2^{49}}{2^{64}} = 2^{-15} \approx 3.05\times10^{-5}.
 \]</span></p>
-<p>Hence, the required probability of picking a random path with an odd number of direction changes is <span class="math display">\[
-\boxed{
-\frac{2 \binom{2n-2}{n-1}}{\binom{2n}{n}} = \frac{n}{2n - 1}
-}.
+<hr>
+</section>
+<section id="final-answer" class="level1">
+<h1>Final Answer</h1>
+<p><strong>Probability</strong> that every row and column has an even number of white marbles:<br>
+<span class="math display">\[
+2^{-15}.
 \]</span></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
