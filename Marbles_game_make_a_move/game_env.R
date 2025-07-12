@@ -6,7 +6,7 @@ GameEnv <- R6Class(
     # Fields
     pos = NULL, #integer from 1 to 25, indicating the position of the marble
     mask = NULL, #logical vector for ruling out visited squares
-    player = NULL,
+    player = NULL, #+1 for A and -1 for B
     
     # Initialise/reset part
     reset = function(){
@@ -28,19 +28,52 @@ GameEnv <- R6Class(
     
     # Legal moves, in order - U,D,L and R
     valid_moves = function(){
+      row <- ceiling(self$pos/5)
+      col <- ((self$pos - 1)%%5) + 1
+      
+      up <- (row  > 1) && !self$mask[self$pos -5]
+      down <- (row < 5) && !self$mask[self$pos + 5]
+      left <- (col > 1) && !self$mask[self$pos - 1]
+      right <- (col < 5) && !self$mask[self$pos + 1]
+      
       #returns logical vector of length 4,
-      logical(4)
+      c(up, down, left, right)
     },
     
     
     # Applying an action (1 for U, 2 for D, 3 for L and 4 for R)
     step = function(action){
       #returns list (state, reward, done)
-      list(
-        state = self$get_state(),
-        reward = 0,
-        done = FALSE
+      
+      moves <- self$valid_moves() # checks for valid move
+      
+      # if invalid move then punish the RL agent
+      if (!moves[action]){
+        return( list ( state = self$get_state(), reward = -10, done = TRUE))
+      }
+      
+      new_pos <- switch(as.character(action),
+                        "1" = self$pos - 5,
+                        "2" = self$pos + 5,
+                        "3" = self$pos - 1,
+                        "4" = self$pos + 1,
       )
+      
+      # moving the marble
+      self$pos <- new_pos
+      self$mask[new_pos] <- TRUE
+      
+      #checking if opponent has a valid move after this
+      #to decide loss or victory
+      next_moves_available <- any(self$valid_moves())
+      
+      #Rewards
+      reward <- if (!next_moves_available) +1 else 0
+      done <- !next_moves_available
+      
+      self$player <- - self$player #giving turn to other player
+      
+      list( state = self$get_state(), reward= reward, done = done)
     },
     
     
