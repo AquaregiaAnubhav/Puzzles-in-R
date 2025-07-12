@@ -1,7 +1,7 @@
 source("game_env.R")
 
 gen_episode <- function(env) {
-  # this will run a ful random gameplay
+  # this will run a full random gameplay
   transitions <- list() # we will collect game states as rows here
   state<- env$reset() # initial state of game
   
