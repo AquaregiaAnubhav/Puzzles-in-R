@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Anubhav Prakash">
 
-<title>Puzzles in R – Solutions to Puzzles in R</title>
+<title>Parity Puzzle on an 8×8 Board – Solutions to Puzzles in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,17 +69,46 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Solutions to Puzzles in R</span>
     </a>
   </div>
@@ -89,23 +119,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Determinant_of_Random_matrices/index.html"> 
+    <a class="nav-link" href="../Determinant_of_Random_matrices/index.html"> 
 <span class="menu-text">Determinant Challenge</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Direction_Change_2/index.html"> 
+    <a class="nav-link" href="../Direction_Change_2/index.html"> 
 <span class="menu-text">Direction Change Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Even_Marbles/index.html"> 
+    <a class="nav-link active" href="../Even_Marbles/index.html" aria-current="page"> 
 <span class="menu-text">Even–Marbles Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Dice_Roll_LCM/index.html"> 
+    <a class="nav-link" href="../Dice_Roll_LCM/index.html"> 
 <span class="menu-text">Dice Roll Problem</span></a>
   </li>  
 </ul>
@@ -119,19 +149,39 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#diagram-regions" id="toc-diagram-regions" class="nav-link" data-scroll-target="#diagram-regions">Diagram &amp; Regions</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#parity-consistency-and-the-last-cell" id="toc-parity-consistency-and-the-last-cell" class="nav-link" data-scroll-target="#parity-consistency-and-the-last-cell">Parity Consistency and the Last Cell</a></li>
+  <li><a href="#counting-final-probability" id="toc-counting-final-probability" class="nav-link" data-scroll-target="#counting-final-probability">Counting &amp; Final Probability</a></li>
+  <li><a href="#why-worry-about-blue-red-parities" id="toc-why-worry-about-blue-red-parities" class="nav-link" data-scroll-target="#why-worry-about-blue-red-parities">Why Worry About Blue &amp; Red Parities?</a></li>
+  <li><a href="#final-answer" id="toc-final-answer" class="nav-link" data-scroll-target="#final-answer">Final Answer</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Puzzles in R</h1>
+<h1 class="title">Parity Puzzle on an 8×8 Board</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anubhav Prakash </p>
+          </div>
+  </div>
     
   
     
@@ -142,14 +192,109 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="directory-for-solutions-to-puzzles-in-r" class="level1">
-<h1>Directory for solutions to Puzzles in R</h1>
+<section id="problem-statement" class="level1">
+<h1>Problem Statement</h1>
+<p>You have an <strong>8×8</strong> board. On each cell you place a black or white marble, independently and uniformly at random. What is the probability that <strong>every row</strong> and <strong>every column</strong> contains an <strong>even</strong> number of white marbles?</p>
+<hr>
+</section>
+<section id="diagram-regions" class="level1">
+<h1>Diagram &amp; Regions</h1>
+<p>Below is the board partitioned into four regions:</p>
 <ul>
-<li><a href="Determinant_of_Random_matrices/index.html">Determinant Challenge</a></li>
-<li><a href="Direction_Change_2/index.html">Direction Change Puzzle</a></li>
-<li><a href="Even_Marbles/index.html">Even-Marbles Puzzle</a></li>
-<li><a href="Dice_Roll_LCM/index.html">10-faced Dice Roll</a></li>
+<li><strong>Green region</strong>: the top 7×7 sub-board<br>
+</li>
+<li><strong>Blue region</strong>: the 1×7 strip on the right of the top 7 rows<br>
+</li>
+<li><strong>Red region</strong>: the 1×7 strip at the bottom<br>
+</li>
+<li>The last left bottom corner cell</li>
 </ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="board_partition.png" class="img-fluid figure-img" width="512"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="key-insight" class="level1">
+<h1>Key Insight</h1>
+<ol type="1">
+<li><p><strong>Green block parity</strong><br>
+Fix all 49 cells of the green 7×7 block arbitrarily. For each row (i=1,,7), let<br>
+<span class="math display">\[p_i = \sum_{j=1}^7 \text{green}(i,j) \bmod 2,\]</span><br>
+and for each column (j=1,,7), let<br>
+<span class="math display">\[q_j = \sum_{i=1}^7 \text{green}(i,j) \bmod 2.\]</span><br>
+Each (p_i,q_j{0,1}) indicates odd (1) or even (0) parity in that row or column of the green region.</p></li>
+<li><p><strong>Blue strip correction</strong><br>
+To correct row (i) parity, set the blue cell at ((i,8)) to (p_i). Since toggling by 1 flips parity, this uniquely enforces evenness: <span class="math display">\[
+  \text{blue}(i,8) = p_i,
+  \quad i=1,\dots,7.
+\]</span></p></li>
+<li><p><strong>Red strip correction</strong><br>
+After placing the blues, each column (j=1,,7) still has parity (q_j). To enforce evenness there, set: <span class="math display">\[
+  \text{red}(8,j) = q_j,
+  \quad j=1,\dots,7.
+\]</span></p></li>
+</ol>
+<hr>
+</section>
+<section id="parity-consistency-and-the-last-cell" class="level1">
+<h1>Parity Consistency and the Last Cell</h1>
+<p>Before choosing ((8,8)):</p>
+<ul>
+<li><strong>Row 8 parity</strong> is<br>
+<span class="math display">\[r_8 = \sum_{j=1}^7 \text{red}(8,j) \bmod 2 = \sum_{j=1}^7 q_j \bmod 2.\]</span></li>
+<li><strong>Column 8 parity</strong> is<br>
+<span class="math display">\[c_8 = \sum_{i=1}^7 \text{blue}(i,8) \bmod 2 = \sum_{i=1}^7 p_i \bmod 2.\]</span></li>
+</ul>
+<p>By exchanging sums, <span class="math display">\[
+  \sum_{i=1}^7 p_i
+  = \sum_{i=1}^7 \sum_{j=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 \sum_{i=1}^7 \text{green}(i,j) \bmod 2
+  = \sum_{j=1}^7 q_j.
+\]</span></p>
+<p>Hence (r_8 = c_8). A single choice of ((8,8)), <span class="math display">\[
+  \text{cell}(8,8) = r_8 = c_8,
+\]</span> simultaneously fixes both final parities to even.</p>
+<hr>
+</section>
+<section id="counting-final-probability" class="level1">
+<h1>Counting &amp; Final Probability</h1>
+<ul>
+<li><strong>Green block</strong>: (2^{49}) arbitrary patterns.<br>
+</li>
+<li><strong>Blue strip</strong>: forced choices ((^7)).<br>
+</li>
+<li><strong>Red strip</strong>: forced choices ((^7)).<br>
+</li>
+<li><strong>Last cell</strong>: forced (()).</li>
+</ul>
+<p>Total valid boards: (2^{49}). Of the (2^{64}) total,<br>
+<span class="math display">\[
+\text{Probability} = \frac{2^{49}}{2^{64}} = 2^{-15} \approx 3.05\times10^{-5}.
+\]</span></p>
+<hr>
+</section>
+<section id="why-worry-about-blue-red-parities" class="level1">
+<h1>Why Worry About Blue &amp; Red Parities?</h1>
+<ul>
+<li><strong>Rows first, columns second</strong> is <em>not</em> symmetrical, so one might fear the two parity-fixing operations could clash.<br>
+</li>
+<li>The “swap-the-sum” identity guarantees they never clash: correcting rows with the blue strip automatically makes the <em>total</em> column parity defect equal to the <em>total</em> row parity defect, so a <em>single</em> marble can finish the job.</li>
+</ul>
+<p>In linear-algebra terms, the 8 row parities + 8 column parities give 16 constraints, but only 15 are independent. Once 15 are satisfied, the last follows automatically—this is why the lone corner cell can resolve both at once.</p>
+<hr>
+</section>
+<section id="final-answer" class="level1">
+<h1>Final Answer</h1>
+<p><strong>Probability</strong> that every row and column has an even number of white marbles:<br>
+<span class="math display">\[
+2^{-15}.
+\]</span></p>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Puzzles in R – Solutions to Puzzles in R</title>
+<title>Probability of odd numbers of direction change paths in 8x8 grid – Solutions to Puzzles in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -78,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Solutions to Puzzles in R</span>
     </a>
   </div>
@@ -89,23 +118,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Determinant_of_Random_matrices/index.html"> 
+    <a class="nav-link" href="../Determinant_of_Random_matrices/index.html"> 
 <span class="menu-text">Determinant Challenge</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Direction_Change_2/index.html"> 
+    <a class="nav-link active" href="../Direction_Change_2/index.html" aria-current="page"> 
 <span class="menu-text">Direction Change Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Even_Marbles/index.html"> 
+    <a class="nav-link" href="../Even_Marbles/index.html"> 
 <span class="menu-text">Even–Marbles Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Dice_Roll_LCM/index.html"> 
+    <a class="nav-link" href="../Dice_Roll_LCM/index.html"> 
 <span class="menu-text">Dice Roll Problem</span></a>
   </li>  
 </ul>
@@ -125,13 +154,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Puzzles in R</h1>
+<h1 class="title">Probability of odd numbers of direction change paths in 8x8 grid</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Anubhav Prakash </p>
+          </div>
+  </div>
     
   
     
@@ -142,17 +177,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="directory-for-solutions-to-puzzles-in-r" class="level1">
-<h1>Directory for solutions to Puzzles in R</h1>
+<p>When you <strong>change direction</strong>, for example if you were initially moving right, you then switch to moving up (and vice versa).<br>
+However, if you change direction <strong>twice</strong>, you end up facing the <strong>same</strong> direction you started with.</p>
+<p>Therefore, after an <strong>odd</strong> number of direction changes, you will be facing a <strong>different</strong> direction from the one you began with.</p>
+<hr>
+<p>Let us place the <span class="math inline">\(n \times n\)</span> lattice in the positive quadrant of the <span class="math inline">\(xy\)</span>-plane, with lattice points labeled <span class="math inline">\((0,0), (0,1), (1,0), \dots, (n,n)\)</span>.</p>
 <ul>
-<li><a href="Determinant_of_Random_matrices/index.html">Determinant Challenge</a></li>
-<li><a href="Direction_Change_2/index.html">Direction Change Puzzle</a></li>
-<li><a href="Even_Marbles/index.html">Even-Marbles Puzzle</a></li>
-<li><a href="Dice_Roll_LCM/index.html">10-faced Dice Roll</a></li>
+<li>If your first step is <strong>rightwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((1,0)\)</span>, then after an odd number of direction changes, your <strong>final</strong> step must be upwards, going from <span class="math inline">\((n,n-1)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
+<li>Similarly, if your first step is <strong>upwards</strong>, i.e.&nbsp;from <span class="math inline">\((0,0)\)</span> to <span class="math inline">\((0,1)\)</span>, then after an odd number of direction changes your <strong>final</strong> step must be rightwards, going from <span class="math inline">\((n-1,n)\)</span> to <span class="math inline">\((n,n)\)</span>.</li>
 </ul>
+<p>So the total number of paths with an odd number of direction changes is the sum of:</p>
+<ul>
+<li>the number of paths from <span class="math inline">\((1,0)\)</span> to <span class="math inline">\((n,n-1)\)</span>, and<br>
+</li>
+<li>the number of paths from <span class="math inline">\((0,1)\)</span> to <span class="math inline">\((n-1,n)\)</span>.</li>
+</ul>
+<p>Each of these counts is <span class="math inline">\(\binom{2n-2}{n-1}\)</span>, so their total is <span class="math display">\[
+2 \times \binom{2n-2}{n-1}.
+\]</span></p>
+<p>The total number of possible paths across the entire lattice is <span class="math display">\[
+\binom{2n}{n}.
+\]</span></p>
+<p>Hence, the required probability of picking a random path with an odd number of direction changes is <span class="math display">\[
+\boxed{
+\frac{2 \binom{2n-2}{n-1}}{\binom{2n}{n}} = \frac{n}{2n - 1}
+}.
+\]</span></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

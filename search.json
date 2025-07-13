@@ -2,50 +2,78 @@
   {
     "objectID": "index.html",
     "href": "index.html",
+    "title": "Puzzles in R",
+    "section": "",
+    "text": "Directory for solutions to Puzzles in R\n\nDeterminant Challenge\nDirection Change Puzzle\nEven-Marbles Puzzle\n10-faced Dice Roll"
+  },
+  {
+    "objectID": "Direction_Change_2/index.html",
+    "href": "Direction_Change_2/index.html",
+    "title": "Probability of odd numbers of direction change paths in 8x8 grid",
+    "section": "",
+    "text": "When you change direction, for example if you were initially moving right, you then switch to moving up (and vice versa).\nHowever, if you change direction twice, you end up facing the same direction you started with.\nTherefore, after an odd number of direction changes, you will be facing a different direction from the one you began with.\n\nLet us place the \\(n \\times n\\) lattice in the positive quadrant of the \\(xy\\)-plane, with lattice points labeled \\((0,0), (0,1), (1,0), \\dots, (n,n)\\).\n\nIf your first step is rightwards, i.e. from \\((0,0)\\) to \\((1,0)\\), then after an odd number of direction changes, your final step must be upwards, going from \\((n,n-1)\\) to \\((n,n)\\).\nSimilarly, if your first step is upwards, i.e. from \\((0,0)\\) to \\((0,1)\\), then after an odd number of direction changes your final step must be rightwards, going from \\((n-1,n)\\) to \\((n,n)\\).\n\nSo the total number of paths with an odd number of direction changes is the sum of:\n\nthe number of paths from \\((1,0)\\) to \\((n,n-1)\\), and\n\nthe number of paths from \\((0,1)\\) to \\((n-1,n)\\).\n\nEach of these counts is \\(\\binom{2n-2}{n-1}\\), so their total is \\[\n2 \\times \\binom{2n-2}{n-1}.\n\\]\nThe total number of possible paths across the entire lattice is \\[\n\\binom{2n}{n}.\n\\]\nHence, the required probability of picking a random path with an odd number of direction changes is \\[\n\\boxed{\n\\frac{2 \\binom{2n-2}{n-1}}{\\binom{2n}{n}} = \\frac{n}{2n - 1}\n}.\n\\]"
+  },
+  {
+    "objectID": "Determinant_of_Random_matrices/index.html",
+    "href": "Determinant_of_Random_matrices/index.html",
+    "title": "Solution to finding expected value of Determinant of Random matrix",
+    "section": "",
+    "text": "This is an easy one. In the GitHub folder for this puzzle, I have uploaded a histogram of 1e6 values of the determinants which indicates the distribution of the determinant and it is pretty evident that the mean is 0.\nThe answer is a very general one, infact any nxn matrix whose each element is i.i.d. random variables, then the determinant has expected value 0. I present two approaches to theoretically arrive at the answer.\n\nConsider an \\(n \\times n\\) random matrix \\[\nA = [a_{i,j}]\n\\] whose entries are i.i.d. random variables drawn from some distribution with finite mean and variance. Denote \\[\n\\mu = \\mathbb{E}[a_{i,j}]\n\\] for any \\((i,j)\\).\n\n\nMathematical Argument (Leibniz Expansion)\nFrom the Leibniz formula, the determinant can be written as \\[\n\\det(A) = \\sum_{\\sigma \\in S_n} \\operatorname{sgn}(\\sigma)\n\\prod_{i=1}^n a_{i, \\sigma(i)},\n\\] where \\(S_n\\) is the symmetric group on \\(n\\) elements, and \\(\\operatorname{sgn}(\\sigma)\\) is the signature of permutation \\(\\sigma\\).\nTaking expectations: \\[\n\\mathbb{E}[\\det(A)] =\n\\sum_{\\sigma \\in S_n} \\operatorname{sgn}(\\sigma)\n\\mathbb{E}\\left[\n\\prod_{i=1}^n a_{i,\\sigma(i)}\n\\right].\n\\] Since the entries are i.i.d., their expectations factorize: \\[\n\\mathbb{E}\\left[\n\\prod_{i=1}^n a_{i,\\sigma(i)}\n\\right]\n= \\prod_{i=1}^n \\mathbb{E}[a_{i,\\sigma(i)}]\n= \\mu^n.\n\\] Hence \\[\n\\mathbb{E}[\\det(A)] = \\mu^n\n\\sum_{\\sigma \\in S_n} \\operatorname{sgn}(\\sigma).\n\\] But \\[\n\\sum_{\\sigma \\in S_n} \\operatorname{sgn}(\\sigma) = 0\n\\] since exactly half of the permutations are even and half are odd. Therefore \\[\n\\boxed{\n\\mathbb{E}[\\det(A)] = 0\n}.\n\\]\n\n\n\nSymmetry Argument (Row Exchange Invariance)\nAlternatively, note that the rows of \\(A\\) are i.i.d., so their joint distribution is exchangeable — any permutation of the rows leaves the distribution of \\(A\\) unchanged.\nHowever, the determinant is an alternating function of its rows: permuting two rows flips the sign of the determinant. That means for any random matrix \\[\n\\det(A) \\overset{d}{=} -\\det(A)\n\\] by randomly permuting two rows.\nTaking expectations on both sides gives \\[\n\\mathbb{E}[\\det(A)] = \\mathbb{E}[-\\det(A)] = -\\mathbb{E}[\\det(A)].\n\\] This forces \\[\n\\boxed{\n\\mathbb{E}[\\det(A)] = 0\n}.\n\\]"
+  },
+  {
+    "objectID": "Dice_Roll_LCM/index.html",
+    "href": "Dice_Roll_LCM/index.html",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "",
     "text": "We first show that exceeding 2000 can happen only when every one of the following prime‑power factors has appeared at least once among the rolled faces:\n\n\\(2^{3}\\) - supplied by the face 8;\n\\(3^{2}\\) - supplied by the face 9;\n\\(5\\) - supplied by the face 5 or 10;\n\\(7\\) - supplied by the face 7.\n\n\n\n\n\nThe largest prime‑factor exponents available on a single die face are\n\n\n\nface\nprime factorisation\n\n\n\n\n8\n\\(2^{3}\\)\n\n\n9\n\\(3^{2}\\)\n\n\n5, 10\n\\(5^{1}\\)\n\n\n7\n\\(7^{1}\\)\n\n\n\nMultiplying those highest exponents gives the maximal possible LCM\n\\[\n\\operatorname*{lcm}\\{1,2,\\dots,10\\}\n  \\;=\\; 2^{3}\\,\\cdot\\,3^{2}\\,\\cdot\\,5\\,\\cdot\\,7\n  \\;=\\; 2520.\n\\]\nBecause \\(2520&gt;2000\\), any LCM that has not yet reached 2520 must still be below 2000.\n\n\n\n\nA running LCM fails to hit 2520 iff it is missing at least one of the four prime factors listed above. Faces not carrying those factors -\\(\\{1,2,3,4,6\\}\\)- can never introduce a new required factor, hence they have no influence over whether the stopping condition is met.\nConsequently, the game’s state can be summarised by four Boolean flags: \\(\\text{Seen7},\\text{Seen8},\\text{Seen9},\\text{Seen5/10}\\). The moment all four flags flip to \\(\\text{TRUE}\\), the cumulative LCM leaps to 2520 and the process stops.\n\n\n\n\nWe now label four “coupons” that must be collected:\n\n\n\ncoupon\nfulfilled when …\nprobability per roll\n\n\n\n\nA\nface 7 appears\n\\(p_A = 0.1\\)\n\n\nB\nface 8 appears\n\\(p_B = 0.1\\)\n\n\nC\nface 9 appears\n\\(p_C = 0.1\\)\n\n\nD\neither 5 or 10 appears\n\\(p_D = 0.2\\)\n\n\n\nRolling continues until all four coupons have been seen. That is exactly a coupon‑collector problem with heterogeneous probabilities \\((0.1,0.1,0.1,0.2)\\)."
   },
   {
-    "objectID": "index.html#the-absolute-upperbound-lcm-for-faces-1-to-10",
-    "href": "index.html#the-absolute-upperbound-lcm-for-faces-1-to-10",
+    "objectID": "Dice_Roll_LCM/index.html#the-absolute-upperbound-lcm-for-faces-1-to-10",
+    "href": "Dice_Roll_LCM/index.html#the-absolute-upperbound-lcm-for-faces-1-to-10",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "",
     "text": "The largest prime‑factor exponents available on a single die face are\n\n\n\nface\nprime factorisation\n\n\n\n\n8\n\\(2^{3}\\)\n\n\n9\n\\(3^{2}\\)\n\n\n5, 10\n\\(5^{1}\\)\n\n\n7\n\\(7^{1}\\)\n\n\n\nMultiplying those highest exponents gives the maximal possible LCM\n\\[\n\\operatorname*{lcm}\\{1,2,\\dots,10\\}\n  \\;=\\; 2^{3}\\,\\cdot\\,3^{2}\\,\\cdot\\,5\\,\\cdot\\,7\n  \\;=\\; 2520.\n\\]\nBecause \\(2520&gt;2000\\), any LCM that has not yet reached 2520 must still be below 2000."
   },
   {
-    "objectID": "index.html#relevant-versus-irrelevant-faces",
-    "href": "index.html#relevant-versus-irrelevant-faces",
+    "objectID": "Dice_Roll_LCM/index.html#relevant-versus-irrelevant-faces",
+    "href": "Dice_Roll_LCM/index.html#relevant-versus-irrelevant-faces",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "",
     "text": "A running LCM fails to hit 2520 iff it is missing at least one of the four prime factors listed above. Faces not carrying those factors -\\(\\{1,2,3,4,6\\}\\)- can never introduce a new required factor, hence they have no influence over whether the stopping condition is met.\nConsequently, the game’s state can be summarised by four Boolean flags: \\(\\text{Seen7},\\text{Seen8},\\text{Seen9},\\text{Seen5/10}\\). The moment all four flags flip to \\(\\text{TRUE}\\), the cumulative LCM leaps to 2520 and the process stops."
   },
   {
-    "objectID": "index.html#reduction-to-a-nonuniform-couponcollector-process",
-    "href": "index.html#reduction-to-a-nonuniform-couponcollector-process",
+    "objectID": "Dice_Roll_LCM/index.html#reduction-to-a-nonuniform-couponcollector-process",
+    "href": "Dice_Roll_LCM/index.html#reduction-to-a-nonuniform-couponcollector-process",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "",
     "text": "We now label four “coupons” that must be collected:\n\n\n\ncoupon\nfulfilled when …\nprobability per roll\n\n\n\n\nA\nface 7 appears\n\\(p_A = 0.1\\)\n\n\nB\nface 8 appears\n\\(p_B = 0.1\\)\n\n\nC\nface 9 appears\n\\(p_C = 0.1\\)\n\n\nD\neither 5 or 10 appears\n\\(p_D = 0.2\\)\n\n\n\nRolling continues until all four coupons have been seen. That is exactly a coupon‑collector problem with heterogeneous probabilities \\((0.1,0.1,0.1,0.2)\\)."
   },
   {
-    "objectID": "index.html#setting-up-the-four-missingcoupon-events",
-    "href": "index.html#setting-up-the-four-missingcoupon-events",
+    "objectID": "Dice_Roll_LCM/index.html#setting-up-the-four-missingcoupon-events",
+    "href": "Dice_Roll_LCM/index.html#setting-up-the-four-missingcoupon-events",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "2.1  Setting up the four “missing‑coupon” events",
     "text": "2.1  Setting up the four “missing‑coupon” events\nFor a fixed prefix length \\(i\\) denote\n\n\\(A =\\) “no 7 has appeared”; single‑roll survival probability \\(9/10\\).\n\\(B =\\) “no 8 has appeared”; survival \\(9/10\\).\n\\(C =\\) “no 9 has appeared”; survival \\(9/10\\).\n\\(D =\\) “neither 5 nor 10 has appeared”; survival \\(8/10\\).\n\nThen \\(q_i = \\Pr(A\\cup B\\cup C\\cup D)\\)."
   },
   {
-    "objectID": "index.html#applying-the-inclusionexclusion-principle",
-    "href": "index.html#applying-the-inclusionexclusion-principle",
+    "objectID": "Dice_Roll_LCM/index.html#applying-the-inclusionexclusion-principle",
+    "href": "Dice_Roll_LCM/index.html#applying-the-inclusionexclusion-principle",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "2.2  Applying the inclusion–exclusion principle",
-    "text": "2.2  Applying the inclusion–exclusion principle\nFor four events the principle states\n\\[\n\\Pr(A\\cup B\\cup C\\cup D)\n  = S_1 - S_2 + S_3 - S_4,\n\\] where \\(S_j\\) is the sum of all size‑\\(j\\) intersections.\n\n\n\n\n\n\n\n\n\n\nterm\n# of such intersections\nsingle‑roll survival prob.\ncontribution to \\(q_i\\)\n\n\n\n\nSingles \\(S_1\\)\n\\(A,B,C\\) (3)\n\\((9/10)^i\\)\n\\(3(9/10)^i\\)\n\n\n\n\\(D\\) (1)\n\\((8/10)^i\\)\n\\(+(8/10)^i\\)\n\n\nPairs \\(S_2\\)\n\\(AB,AC,BC\\) (3)\n\\((8/10)^i\\)\n\\(3(8/10)^i\\)\n\n\n\n\\(AD,BD,CD\\) (3)\n\\((7/10)^i\\)\n\\(+3(7/10)^i\\)\n\n\nTriples \\(S_3\\)\n\\(ABC\\) (1)\n\\((7/10)^i\\)\n\\((7/10)^i\\)\n\n\n\n\\(ABD,ACD,BCD\\) (3)\n\\((6/10)^i\\)\n\\(+3(6/10)^i\\)\n\n\nQuadruple \\(S_4\\)\n\\(ABCD\\) (1)\n\\((5/10)^i\\)\n\\((5/10)^i\\)\n\n\n\nCombining with alternating signs we obtain\n\\[\nq_i\n  = \\bigl[3(9/10)^i + (8/10)^i\\bigr]\n    - \\bigl[3(8/10)^i + 3(7/10)^i\\bigr]\n    + \\bigl[(7/10)^i + 3(6/10)^i\\bigr]\n    - (5/10)^i.\n\\]\nMultiplying numerator and denominator by \\(10^i\\) to display integer bases gives\n\\[\nq_i \\;=\\; \\frac{3\\,9^{i} - 2\\,8^{i} - 2\\,7^{i} + 3\\,6^{i} - 5^{i}}\n                  {10^{i}}.\n\\]\nThat is exactly the expression obtained by the inclusion–exclusion bookkeeping and matches the formula quoted in the informal explanation."
+    "text": "2.2  Applying the inclusion–exclusion principle\nFor four events the principle states\n\\[\n\\Pr(A\\cup B\\cup C\\cup D)\n  = S_1 - S_2 + S_3 - S_4,\n\\] where \\(S_j\\) is the sum of all size‑\\(j\\) intersections.\n\n\n\n\n\n\n\n\n\n\nterm\n# of such intersections\nsingle‑roll survival prob.\ncontribution to \\(q_i\\)\n\n\n\n\nSingles \\(S_1\\)\n\\(A,B,C\\) (3)\n\\((9/10)^i\\)\n\\(3(9/10)^i\\)\n\n\n\n\\(D\\) (1)\n\\((8/10)^i\\)\n\\(+(8/10)^i\\)\n\n\nPairs \\(S_2\\)\n\\(AB,AC,BC\\) (3)\n\\((8/10)^i\\)\n\\(3(8/10)^i\\)\n\n\n\n\\(AD,BD,CD\\) (3)\n\\((7/10)^i\\)\n\\(+3(7/10)^i\\)\n\n\nTriples \\(S_3\\)\n\\(ABC\\) (1)\n\\((7/10)^i\\)\n\\((7/10)^i\\)\n\n\n\n\\(ABD,ACD,BCD\\) (3)\n\\((6/10)^i\\)\n\\(+3(6/10)^i\\)\n\n\nQuadruple \\(S_4\\)\n\\(ABCD\\) (1)\n\\((5/10)^i\\)\n\\((5/10)^i\\)\n\n\n\nCombining with alternating signs we obtain\n\\[\nq_i\n  = \\bigl[3(9/10)^i + (8/10)^i\\bigr]\n    - \\bigl[3(8/10)^i + 3(7/10)^i\\bigr]\n    + \\bigl[(7/10)^i + 3(6/10)^i\\bigr]\n    - (5/10)^i.\n\\]\nMultiplying numerator and denominator by \\(10^i\\) to display integer bases gives\n\\[\nq_i \\;=\\; \\frac{3.9^{i} - 2.8^{i} - 2.7^{i} + 3.6^{i} - 5^{i}}\n                  {10^{i}}.\n\\]\nThat is exactly the expression obtained by the inclusion–exclusion bookkeeping and matches the formula quoted in the informal explanation."
   },
   {
-    "objectID": "index.html#summing-the-geometric-series",
-    "href": "index.html#summing-the-geometric-series",
+    "objectID": "Dice_Roll_LCM/index.html#summing-the-geometric-series",
+    "href": "Dice_Roll_LCM/index.html#summing-the-geometric-series",
     "title": "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000",
     "section": "2.3  Summing the geometric series",
     "text": "2.3  Summing the geometric series\nBecause each term in \\(q_i\\) is geometric, the infinite sum has a closed form. For a ratio \\(r\\) with \\(|r|&lt;1\\) \\[\\sum_{i=1}^{\\infty} r^{i}=\\frac{r}{1-r}.\\] Applying that to the five ratios \\(9/10,\\;8/10,\\;7/10,\\;6/10,\\;5/10\\) and plugging in the coefficients yields\n\\[\n\\begin{aligned}\n\\mathbb E[X]\n  &= 1 + 3\\Bigl(\\frac{9}{10}/\\frac{1}{10}\\Bigr)\n       -2\\Bigl(\\frac{8}{10}/\\frac{2}{10}\\Bigr)\n       -2\\Bigl(\\frac{7}{10}/\\frac{3}{10}\\Bigr)\\\\[4pt]\n  &\\quad +3\\Bigl(\\frac{6}{10}/\\frac{4}{10}\\Bigr)\n       -\\Bigl(\\frac{5}{10}/\\frac{5}{10}\\Bigr)\\\\[6pt]\n  &= 1 + 27 - 8 - 14 + 18 - 5\\\\[4pt]\n  &= \\boxed{\\dfrac{113}{6} \\;\\approx\\; 18.833}.\n\\end{aligned}\n\\]\nHence on average 18.83 rolls are required for the LCM to exceed 2000."
+  },
+  {
+    "objectID": "Even_Marbles/index.html",
+    "href": "Even_Marbles/index.html",
+    "title": "Parity Puzzle on an 8×8 Board",
+    "section": "",
+    "text": "Problem Statement\nYou have an 8×8 board. On each cell you place a black or white marble, independently and uniformly at random. What is the probability that every row and every column contains an even number of white marbles?\n\n\n\nDiagram & Regions\nBelow is the board partitioned into four regions:\n\nGreen region: the top 7×7 sub-board\n\nBlue region: the 1×7 strip on the right of the top 7 rows\n\nRed region: the 1×7 strip at the bottom\n\nThe last left bottom corner cell\n\n\n\n\n\n\n\n\n\n\n\n\n\nKey Insight\n\nGreen block parity\nFix all 49 cells of the green 7×7 block arbitrarily. For each row (i=1,,7), let\n\\[p_i = \\sum_{j=1}^7 \\text{green}(i,j) \\bmod 2,\\]\nand for each column (j=1,,7), let\n\\[q_j = \\sum_{i=1}^7 \\text{green}(i,j) \\bmod 2.\\]\nEach (p_i,q_j{0,1}) indicates odd (1) or even (0) parity in that row or column of the green region.\nBlue strip correction\nTo correct row (i) parity, set the blue cell at ((i,8)) to (p_i). Since toggling by 1 flips parity, this uniquely enforces evenness: \\[\n  \\text{blue}(i,8) = p_i,\n  \\quad i=1,\\dots,7.\n\\]\nRed strip correction\nAfter placing the blues, each column (j=1,,7) still has parity (q_j). To enforce evenness there, set: \\[\n  \\text{red}(8,j) = q_j,\n  \\quad j=1,\\dots,7.\n\\]\n\n\n\n\nParity Consistency and the Last Cell\nBefore choosing ((8,8)):\n\nRow 8 parity is\n\\[r_8 = \\sum_{j=1}^7 \\text{red}(8,j) \\bmod 2 = \\sum_{j=1}^7 q_j \\bmod 2.\\]\nColumn 8 parity is\n\\[c_8 = \\sum_{i=1}^7 \\text{blue}(i,8) \\bmod 2 = \\sum_{i=1}^7 p_i \\bmod 2.\\]\n\nBy exchanging sums, \\[\n  \\sum_{i=1}^7 p_i\n  = \\sum_{i=1}^7 \\sum_{j=1}^7 \\text{green}(i,j) \\bmod 2\n  = \\sum_{j=1}^7 \\sum_{i=1}^7 \\text{green}(i,j) \\bmod 2\n  = \\sum_{j=1}^7 q_j.\n\\]\nHence (r_8 = c_8). A single choice of ((8,8)), \\[\n  \\text{cell}(8,8) = r_8 = c_8,\n\\] simultaneously fixes both final parities to even.\n\n\n\nCounting & Final Probability\n\nGreen block: (2^{49}) arbitrary patterns.\n\nBlue strip: forced choices ((^7)).\n\nRed strip: forced choices ((^7)).\n\nLast cell: forced (()).\n\nTotal valid boards: (2^{49}). Of the (2^{64}) total,\n\\[\n\\text{Probability} = \\frac{2^{49}}{2^{64}} = 2^{-15} \\approx 3.05\\times10^{-5}.\n\\]\n\n\n\nWhy Worry About Blue & Red Parities?\n\nRows first, columns second is not symmetrical, so one might fear the two parity-fixing operations could clash.\n\nThe “swap-the-sum” identity guarantees they never clash: correcting rows with the blue strip automatically makes the total column parity defect equal to the total row parity defect, so a single marble can finish the job.\n\nIn linear-algebra terms, the 8 row parities + 8 column parities give 16 constraints, but only 15 are independent. Once 15 are satisfied, the last follows automatically—this is why the lone corner cell can resolve both at once.\n\n\n\nFinal Answer\nProbability that every row and column has an even number of white marbles:\n\\[\n2^{-15}.\n\\]"
   }
 ]
