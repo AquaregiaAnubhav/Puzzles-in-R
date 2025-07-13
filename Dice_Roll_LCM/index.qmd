@@ -1,0 +1,190 @@
+---
+title: "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000"
+author: "Anubhav Prakash"
+format: html
+jupyter: true
+---
+
+# 1  REMARK : Only the faces 7, 8, 9 and (5 or 10) matter
+
+> We first show that *exceeding* 2000 can happen **only** when every one of the
+> following prime‑power factors has appeared at least once among the rolled
+> faces:
+>
+> * \(2^{3}\) — supplied by the face 8;
+> * \(3^{2}\) — supplied by the face 9;
+> * \(5\) — supplied by the face 5 **or** 10;
+> * \(7\) — supplied by the face 7.
+
+---
+
+## 1.1 The absolute upper‑bound LCM for faces 1 to 10
+
+The largest prime‑factor exponents available on a single die face are
+
+| face | prime factorisation |
+|------|---------------------|
+| 8 | \(2^{3}\) |
+| 9 | \(3^{2}\) |
+| 5, 10 | \(5^{1}\) |
+| 7 | \(7^{1}\) |
+
+Multiplying those highest exponents gives the **maximal possible LCM**
+
+\[
+\operatorname*{lcm}\{1,2,\dots,10\}
+  \;=\; 2^{3}\,\cdot\,3^{2}\,\cdot\,5\,\cdot\,7
+  \;=\; 2520.
+\]
+
+Because \(2520>2000\), *any* LCM that has not yet reached 2520 must still be
+below 2000.
+
+```{r max-lcm, echo=FALSE, message=FALSE}
+# Quick computational check (optional):
+if (!requireNamespace("numbers", quietly = TRUE)) {
+  install.packages("numbers", quiet = TRUE)
+}
+library(numbers)
+Reduce(LCM, 1:10)   #> 2520
+```
+
+---
+
+## 1.2 “Relevant” versus “irrelevant” faces
+
+A running LCM fails to hit 2520 **iff** it is missing *at least one* of the four
+prime factors listed above.  Faces *not* carrying those factors —\(\{1,2,3,4,6\}\)—
+**can never introduce a new required factor**, hence they have no influence over
+whether the stopping condition is met.
+
+Consequently, the game’s state can be summarised by four Boolean flags:
+\(\text{Seen7},\text{Seen8},\text{Seen9},\text{Seen5/10}\).  The moment all
+four flags flip to \(\text{TRUE}\), the cumulative LCM leaps to 2520 and the
+process stops.
+
+---
+
+## 1.3 Reduction to a non‑uniform coupon‑collector process
+
+We now label four “coupons” that must be collected:
+
+| coupon | fulfilled when … | probability per roll |
+|--------|------------------|-----------------------|
+| **A** | face 7 appears | \(p_A = 0.1\) |
+| **B** | face 8 appears | \(p_B = 0.1\) |
+| **C** | face 9 appears | \(p_C = 0.1\) |
+| **D** | *either* 5 *or* 10 appears | \(p_D = 0.2\) |
+
+Rolling continues until **all four coupons have been seen**.  That is exactly a
+*coupon‑collector* problem with heterogeneous probabilities
+\((0.1,0.1,0.1,0.2)\).
+
+---
+# 2  Expected number of rolls via indicator variables & inclusion–exclusion
+
+Let $X$ be the total number of rolls required.  Define the indicator variables
+
+$$
+Z_i \;=\;
+  \begin{cases}
+    1, & \text{if after the first $i$ rolls we are *still missing* at least one coupon},\\[2pt]
+    0, & \text{otherwise.}
+  \end{cases}
+$$
+
+Because $Z_i=1$ precisely when we *have not yet stopped* at time $i$, the well‑
+known identity
+
+$$X \;=\; 1 + \sum_{i=1}^{\infty} Z_i$$
+
+gives the expectation
+
+$$
+\mathbb E[X] \;=\; 1 + \sum_{i=1}^{\infty} q_i,\quad
+q_i := \Pr(Z_i=1).
+$$
+
+Our task reduces to evaluating each $q_i$.
+
+---
+
+## 2.1  Setting up the four “missing‑coupon” events
+
+For a fixed prefix length $i$ denote
+
+* $A =$ “no 7 has appeared”;   single‑roll survival probability $9/10$.
+* $B =$ “no 8 has appeared”;   survival $9/10$.
+* $C =$ “no 9 has appeared”;   survival $9/10$.
+* $D =$ “neither 5 nor 10 has appeared”; survival $8/10$.
+
+Then $q_i = \Pr(A\cup B\cup C\cup D)$.
+
+---
+
+## 2.2  Applying the inclusion–exclusion principle
+
+For four events the principle states
+
+$$
+\Pr(A\cup B\cup C\cup D)
+  = S_1 - S_2 + S_3 - S_4,
+$$
+where $S_j$ is the sum of all size‑$j$ intersections.
+
+<br>
+
+| term | # of such intersections | single‑roll survival prob. | contribution to $q_i$ |
+|------|------------------------|----------------------------|-------------------------|
+| **Singles** $S_1$ | $A,B,C$ (3) | $(9/10)^i$ | $3(9/10)^i$ |
+| | $D$ (1) | $(8/10)^i$ | $+(8/10)^i$ |
+| **Pairs** $S_2$ | $AB,AC,BC$ (3) | $(8/10)^i$ | $3(8/10)^i$ |
+| | $AD,BD,CD$ (3) | $(7/10)^i$ | $+3(7/10)^i$ |
+| **Triples** $S_3$ | $ABC$ (1) | $(7/10)^i$ | $(7/10)^i$ |
+| | $ABD,ACD,BCD$ (3) | $(6/10)^i$ | $+3(6/10)^i$ |
+| **Quadruple** $S_4$ | $ABCD$ (1) | $(5/10)^i$ | $(5/10)^i$ |
+
+Combining with alternating signs we obtain
+
+$$
+q_i
+  = \bigl[3(9/10)^i + (8/10)^i\bigr]
+    - \bigl[3(8/10)^i + 3(7/10)^i\bigr]
+    + \bigl[(7/10)^i + 3(6/10)^i\bigr]
+    - (5/10)^i.
+$$
+
+Multiplying numerator and denominator by $10^i$ to display integer bases gives
+
+$$
+q_i \;=\; \frac{3\,9^{i} - 2\,8^{i} - 2\,7^{i} + 3\,6^{i} - 5^{i}}
+                  {10^{i}}.
+$$
+
+That is exactly the expression obtained by the *inclusion–exclusion* bookkeeping
+and matches the formula quoted in the informal explanation.
+
+---
+
+## 2.3  Summing the geometric series
+
+Because each term in $q_i$ is geometric, the infinite sum has a closed form.
+For a ratio $r$ with $|r|<1$
+$$\sum_{i=1}^{\infty} r^{i}=\frac{r}{1-r}.$$
+Applying that to the five ratios $9/10,\;8/10,\;7/10,\;6/10,\;5/10$ and
+plugging in the coefficients yields
+
+$$
+\begin{aligned}
+\mathbb E[X]
+  &= 1 + 3\Bigl(\frac{9}{10}/\frac{1}{10}\Bigr)
+       -2\Bigl(\frac{8}{10}/\frac{2}{10}\Bigr)
+       -2\Bigl(\frac{7}{10}/\frac{3}{10}\Bigr)\\[4pt]
+  &\quad +3\Bigl(\frac{6}{10}/\frac{4}{10}\Bigr)
+       -\Bigl(\frac{5}{10}/\frac{5}{10}\Bigr)\\[6pt]
+  &= 1 + 27 - 8 - 14 + 18 - 5\\[4pt]
+  &= \boxed{\dfrac{113}{6} \;\approx\; 18.833}.
+\end{aligned}
+$$
+
+Hence on average **18.83 rolls** are required for the LCM to exceed 2000.
