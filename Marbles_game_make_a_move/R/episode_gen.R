@@ -1,4 +1,4 @@
-source("game_env.R")
+source("R/game_env.R")
 
 gen_episode <- function(env) {
   # this will run a full random gameplay

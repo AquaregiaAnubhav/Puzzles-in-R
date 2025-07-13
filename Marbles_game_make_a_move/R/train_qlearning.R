@@ -1,6 +1,6 @@
 library(ReinforcementLearning)
-source("game_env.R")
-source("episode_gen.R")
+source("R/game_env.R")
+source("R/episode_gen.R")
 
 # Generate random-play episodes
 n_episodes <- 1000
@@ -71,6 +71,6 @@ evaluate_policy <- function(policy, n_games = 200){
   invisible(win_rate)
 }
 
-win_rate <- evaluate_policy(model$Policy, n_games= 200)
-
-cat(sprintf("Win rate vs random : %.1f%%\n", win_rate * 100))
+# win_rate <- evaluate_policy(model$Policy, n_games= 200)
+# 
+# cat(sprintf("Win rate vs random : %.1f%%\n", win_rate * 100))
