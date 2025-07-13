@@ -6,74 +6,75 @@ authors:
 output-file: index.html
 ---
 
-# 1  REMARK : Only the faces 7, 8, 9 and (5 or 10) matter
+# 1.  REMARK : Only the faces 7, 8, 9 and (5 or 10) matter
 
 > We first show that *exceeding* 2000 can happen **only** when every one of the
 > following prime‑power factors has appeared at least once among the rolled
 > faces:
 >
-> * \(2^{3}\) — supplied by the face 8;
-> * \(3^{2}\) — supplied by the face 9;
-> * \(5\) — supplied by the face 5 **or** 10;
-> * \(7\) — supplied by the face 7.
+> * $2^{3}$ - supplied by the face 8;
+> * $3^{2}$ - supplied by the face 9;
+> * $5$ - supplied by the face 5 **or** 10;
+> * $7$ - supplied by the face 7.
 
 ---
 
-## 1.1 The absolute upper‑bound LCM for faces 1 to 10
+##  1.1 The absolute upper‑bound LCM for faces 1 to 10
 
 The largest prime‑factor exponents available on a single die face are
 
 | face | prime factorisation |
 |------|---------------------|
-| 8 | \(2^{3}\) |
-| 9 | \(3^{2}\) |
-| 5, 10 | \(5^{1}\) |
-| 7 | \(7^{1}\) |
+| 8 | $2^{3}$ |
+| 9 | $3^{2}$ |
+| 5, 10 | $5^{1}$ |
+| 7 | $7^{1}$ |
 
 Multiplying those highest exponents gives the **maximal possible LCM**
 
-\[
+$$
 \operatorname*{lcm}\{1,2,\dots,10\}
   \;=\; 2^{3}\,\cdot\,3^{2}\,\cdot\,5\,\cdot\,7
   \;=\; 2520.
-\]
+$$
 
-Because \(2520>2000\), *any* LCM that has not yet reached 2520 must still be
+Because $2520>2000$, *any* LCM that has not yet reached 2520 must still be
 below 2000.
 
 ---
 
-## 1.2 “Relevant” versus “irrelevant” faces
+##  1.2 “Relevant” versus “irrelevant” faces
 
 A running LCM fails to hit 2520 **iff** it is missing *at least one* of the four
-prime factors listed above.  Faces *not* carrying those factors —\(\{1,2,3,4,6\}\)—
+prime factors listed above.  Faces *not* carrying those factors -$\{1,2,3,4,6\}$-
 **can never introduce a new required factor**, hence they have no influence over
 whether the stopping condition is met.
 
 Consequently, the game’s state can be summarised by four Boolean flags:
-\(\text{Seen7},\text{Seen8},\text{Seen9},\text{Seen5/10}\).  The moment all
-four flags flip to \(\text{TRUE}\), the cumulative LCM leaps to 2520 and the
+$\text{Seen7},\text{Seen8},\text{Seen9},\text{Seen5/10}$.  The moment all
+four flags flip to $\text{TRUE}$, the cumulative LCM leaps to 2520 and the
 process stops.
 
 ---
 
-## 1.3 Reduction to a non‑uniform coupon‑collector process
+##  1.3 Reduction to a non‑uniform coupon‑collector process
 
 We now label four “coupons” that must be collected:
 
 | coupon | fulfilled when … | probability per roll |
 |--------|------------------|-----------------------|
-| **A** | face 7 appears | \(p_A = 0.1\) |
-| **B** | face 8 appears | \(p_B = 0.1\) |
-| **C** | face 9 appears | \(p_C = 0.1\) |
-| **D** | *either* 5 *or* 10 appears | \(p_D = 0.2\) |
+| **A** | face 7 appears | $p_A = 0.1$ |
+| **B** | face 8 appears | $p_B = 0.1$ |
+| **C** | face 9 appears | $p_C = 0.1$ |
+| **D** | *either* 5 *or* 10 appears | $p_D = 0.2$ |
 
 Rolling continues until **all four coupons have been seen**.  That is exactly a
 *coupon‑collector* problem with heterogeneous probabilities
-\((0.1,0.1,0.1,0.2)\).
+$(0.1,0.1,0.1,0.2)$.
 
 ---
-# 2  Expected number of rolls via indicator variables & inclusion–exclusion
+
+# 2. Expected number of rolls via indicator variables & inclusion–exclusion
 
 Let $X$ be the total number of rolls required.  Define the indicator variables
 
@@ -149,7 +150,7 @@ $$
 Multiplying numerator and denominator by $10^i$ to display integer bases gives
 
 $$
-q_i \;=\; \frac{3\,9^{i} - 2\,8^{i} - 2\,7^{i} + 3\,6^{i} - 5^{i}}
+q_i \;=\; \frac{3.9^{i} - 2.8^{i} - 2.7^{i} + 3.6^{i} - 5^{i}}
                   {10^{i}}.
 $$
 

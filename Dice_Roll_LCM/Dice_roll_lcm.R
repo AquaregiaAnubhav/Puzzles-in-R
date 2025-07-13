@@ -34,6 +34,7 @@ n_iter <- function(n){
 return(n_count_sum/iterations)
 }
 
+system.time({print(n_iter(100000))})
 
 ############################################################################
 ## Chatgpt-o3 code for same problem (slower than mine for n ~ 1e5 or larger)
