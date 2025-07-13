@@ -1,8 +1,9 @@
 ---
 title: "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000"
-author: "Anubhav Prakash"
 format: html
-jupyter: true
+authors:
+  - name: Anubhav Prakash
+output-file: index.html
 ---
 
 # 1  REMARK : Only the faces 7, 8, 9 and (5 or 10) matter
@@ -39,15 +40,6 @@ Multiplying those highest exponents gives the **maximal possible LCM**
 
 Because \(2520>2000\), *any* LCM that has not yet reached 2520 must still be
 below 2000.
-
-```{r max-lcm, echo=FALSE, message=FALSE}
-# Quick computational check (optional):
-if (!requireNamespace("numbers", quietly = TRUE)) {
-  install.packages("numbers", quiet = TRUE)
-}
-library(numbers)
-Reduce(LCM, 1:10)   #> 2520
-```
 
 ---
 

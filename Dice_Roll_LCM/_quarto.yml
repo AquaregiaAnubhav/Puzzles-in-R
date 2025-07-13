@@ -1,0 +1,12 @@
+project:
+  type: website
+
+website:
+  title: "Expected Rolls for a 10‑Sided Die to Push the LCM Beyond 2000"
+  navbar: true
+
+      
+format:
+  html:
+    comments:
+      hypothesis: true

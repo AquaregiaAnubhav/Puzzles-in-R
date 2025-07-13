@@ -12,7 +12,9 @@ website:
       - text: "Direction Change Puzzle"
         href: Direction_Change_2/index.html
       - text: "Even–Marbles Puzzle"         
-        href: Even_Marbles/index.html       
+        href: Even_Marbles/index.html 
+      - text: "Dice Roll Problem"         
+        href: Dice_Roll_LCM/index.html       
   page-navigation: false
 
 format:

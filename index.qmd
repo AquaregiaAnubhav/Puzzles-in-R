@@ -8,4 +8,5 @@ format: html
 - [Determinant Challenge](Determinant_of_Random_matrices/index.html)
 - [Direction Change Puzzle](Direction_Change_2/index.html)
 - [Even-Marbles Puzzle](Even_Marbles/index.html)
+- [10-faced Dice Roll](Dice_Roll_LCM/index.html)
 
