@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Anubhav Prakash">
+<meta name="author" content="Anubhav Prakash">
 
-<title>Parity Puzzle on an 8×8 Board – Solutions to Puzzles in R</title>
+<title>Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice – Solutions to Puzzles in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,7 +101,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -131,7 +131,7 @@ window.Quarto = {
 <span class="menu-text">Direction Change Puzzle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../Even_Marbles/index.html" aria-current="page"> 
+    <a class="nav-link" href="../Even_Marbles/index.html"> 
 <span class="menu-text">Even–Marbles Puzzle</span></a>
   </li>  
   <li class="nav-item">
@@ -139,7 +139,7 @@ window.Quarto = {
 <span class="menu-text">Dice Roll Problem</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Avg_triangle_area_on_a_lattice/index.html"> 
+    <a class="nav-link active" href="../Avg_triangle_area_on_a_lattice/index.html" aria-current="page"> 
 <span class="menu-text">Average area-square of Random Triangles</span></a>
   </li>  
 </ul>
@@ -153,27 +153,13 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link active" data-scroll-target="#problem-statement">Problem Statement</a></li>
-  <li><a href="#diagram-regions" id="toc-diagram-regions" class="nav-link" data-scroll-target="#diagram-regions">Diagram &amp; Regions</a></li>
-  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
-  <li><a href="#parity-consistency-and-the-last-cell" id="toc-parity-consistency-and-the-last-cell" class="nav-link" data-scroll-target="#parity-consistency-and-the-last-cell">Parity Consistency and the Last Cell</a></li>
-  <li><a href="#counting-final-probability" id="toc-counting-final-probability" class="nav-link" data-scroll-target="#counting-final-probability">Counting &amp; Final Probability</a></li>
-  <li><a href="#why-worry-about-blue-red-parities" id="toc-why-worry-about-blue-red-parities" class="nav-link" data-scroll-target="#why-worry-about-blue-red-parities">Why Worry About Blue &amp; Red Parities?</a></li>
-  <li><a href="#final-answer" id="toc-final-answer" class="nav-link" data-scroll-target="#final-answer">Final Answer</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Parity Puzzle on an 8×8 Board</h1>
+<h1 class="title">Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice</h1>
 </div>
 
 
@@ -183,7 +169,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Anubhav Prakash </p>
+             <p>Anubhav Prakash </p>
           </div>
   </div>
     
@@ -196,109 +182,78 @@ window.Quarto = {
 </header>
 
 
-<section id="problem-statement" class="level1">
-<h1>Problem Statement</h1>
-<p>You have an <strong>8×8</strong> board. On each cell you place a black or white marble, independently and uniformly at random. What is the probability that <strong>every row</strong> and <strong>every column</strong> contains an <strong>even</strong> number of white marbles?</p>
+<section id="from-lattice-points-to-area-the-shoelace-roadmap" class="level1">
+<h1>1 From lattice points to area&nbsp;— the Shoelace roadmap</h1>
+<p>~<del>{mermaid} flowchart TD A[Lattice<br>point&nbsp;1<br>(x₁,y₁)] –&gt;|choose 3&nbsp;i.i.d.| B[Lattice<br>point&nbsp;2<br>(x₂,y₂)] B –&gt; C[Lattice<br>point&nbsp;3<br>(x₃,y₃)] C –&gt; D[Cross‑product<br>(x₂−x₁)(y₃−y₁) − (x₃−x₁)(y₂−y₁)] D –&gt; E[Area&nbsp;A&nbsp;=&nbsp;|cross| ⁄ 2] E –&gt; F[A²] F –&gt; G[𝔼[A²]&nbsp;←&nbsp;this&nbsp;paper]</del>~</p>
+<p>For three independently and uniformly chosen lattice points<br>
+[ (x_1,y_1),;(x_2,y_2),;(x_3,y_3){0,1,2,3,4}^2, ] the <strong>Shoelace formula</strong> gives the signed area</p>
+<p>[ A ;=; . ]</p>
+<p>Introduce the cross‑product</p>
+<p>[ C := (x_2!-!x_1)(y_3!-!y_1) - (x_3!-!x_1)(y_2!-!y_1), A = , A^{2} = . ]</p>
+<p>Hence<br>
+[ . ]</p>
 <hr>
 </section>
-<section id="diagram-regions" class="level1">
-<h1>Diagram &amp; Regions</h1>
-<p>Below is the board partitioned into four regions:</p>
+<section id="moments-of-the-coordinate-variables" class="level1">
+<h1>2 Moments of the coordinate variables</h1>
+<p>Each coordinate is an i.i.d. discrete‑uniform variable on<br>
+(S={0,1,2,3,4}).</p>
+<section id="first-moments" class="level2">
+<h2 class="anchored" data-anchor-id="first-moments">2.1 First moments</h2>
+<p>[ E[X] = = 2, E[Y] = 2. ]</p>
+</section>
+<section id="second-moments" class="level2">
+<h2 class="anchored" data-anchor-id="second-moments">2.2 Second moments</h2>
+<p>[ E[X^{2}] = ==6, E[Y^{2}] = 6. ]</p>
+<p>Thus<br>
+((X)=(Y)=6-2^{2}=2.)</p>
+<hr>
+</section>
+</section>
+<section id="computing-ec2" class="level1">
+<h1>3 Computing (E[C^{2}])</h1>
+[
+<span class="math display">\[\begin{aligned}
+C
+  &amp;= (x_2-x_1)(y_3-y_1) - (x_3-x_1)(y_2-y_1), \\[4pt]
+C^{2}
+  &amp;= (x_2-x_1)^{2}(y_3-y_1)^{2}
+     + (x_3-x_1)^{2}(y_2-y_1)^{2} \\
+  &amp;\quad\; - 2\,(x_2-x_1)(x_3-x_1)(y_2-y_1)(y_3-y_1).
+\end{aligned}\]</span>
+<p>]</p>
+<p>Because all six variables are independent:</p>
 <ul>
-<li><strong>Green region</strong>: the top 7×7 sub-board<br>
-</li>
-<li><strong>Blue region</strong>: the 1×7 strip on the right of the top 7 rows<br>
-</li>
-<li><strong>Red region</strong>: the 1×7 strip at the bottom<br>
-</li>
-<li>The last left bottom corner cell</li>
+<li><p>(E[(x_2 - x_1)^{2}] = (X_2 - X_1) = 2,(X) = 4),<br>
+and likewise for each squared coordinate difference;</p></li>
+<li><p>Mixed expectations factor:</p></li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="board_partition.png" class="img-fluid figure-img" width="512"></p>
-</figure>
-</div>
-</div>
-</div>
+[
+<span class="math display">\[\begin{aligned}
+\mathbb E[(x_2 - x_1)(x_3 - x_1)]
+  &amp;= \mathbb E[x_2x_3] - 2\,\mathbb E[x_2x_1] + \mathbb E[x_1^{2}] \\
+  &amp;= (2)(2) - 2(2)(2) + 6 = 2,
+\end{aligned}\]</span>
+<p>] and (E[(y_2 - y_1)(y_3 - y_1)] = 2.)</p>
+<p>Putting the pieces together:</p>
+<p>[ E[C^{2}] = 4 ;+; 4 ;-; 2 = 16 + 16 - 8 = 24. ]</p>
 <hr>
 </section>
-<section id="key-insight" class="level1">
-<h1>Key Insight</h1>
-<ol type="1">
-<li><p><strong>Green block parity</strong><br>
-Fix all 49 cells of the green 7×7 block arbitrarily. For each row (i=1,,7), let<br>
-<span class="math display">\[p_i = \sum_{j=1}^7 \text{green}(i,j) \bmod 2,\]</span><br>
-and for each column (j=1,,7), let<br>
-<span class="math display">\[q_j = \sum_{i=1}^7 \text{green}(i,j) \bmod 2.\]</span><br>
-Each (p_i,q_j{0,1}) indicates odd (1) or even (0) parity in that row or column of the green region.</p></li>
-<li><p><strong>Blue strip correction</strong><br>
-To correct row (i) parity, set the blue cell at ((i,8)) to (p_i). Since toggling by 1 flips parity, this uniquely enforces evenness: <span class="math display">\[
-  \text{blue}(i,8) = p_i,
-  \quad i=1,\dots,7.
-\]</span></p></li>
-<li><p><strong>Red strip correction</strong><br>
-After placing the blues, each column (j=1,,7) still has parity (q_j). To enforce evenness there, set: <span class="math display">\[
-  \text{red}(8,j) = q_j,
-  \quad j=1,\dots,7.
-\]</span></p></li>
-</ol>
+<section id="the-expected-square-of-the-area" class="level1">
+<h1>4 The expected square of the area</h1>
+<p>[ . ]</p>
+<p>So the average of the square of the area of a triangle formed by three uniformly selected points from the 5 × 5 lattice is <strong>6</strong>.</p>
 <hr>
 </section>
-<section id="parity-consistency-and-the-last-cell" class="level1">
-<h1>Parity Consistency and the Last Cell</h1>
-<p>Before choosing ((8,8)):</p>
+<section id="key-takeaways" class="level1">
+<h1>5 Key take‑aways</h1>
 <ul>
-<li><strong>Row 8 parity</strong> is<br>
-<span class="math display">\[r_8 = \sum_{j=1}^7 \text{red}(8,j) \bmod 2 = \sum_{j=1}^7 q_j \bmod 2.\]</span></li>
-<li><strong>Column 8 parity</strong> is<br>
-<span class="math display">\[c_8 = \sum_{i=1}^7 \text{blue}(i,8) \bmod 2 = \sum_{i=1}^7 p_i \bmod 2.\]</span></li>
+<li><strong>Shoelace formula</strong> converts the area into a simple cross‑product.<br>
+</li>
+<li>Independence and identical distributions reduce every mixed moment to products of first and second moments.<br>
+</li>
+<li>(E[C^{2}] = 24) immediately yields (E[A^{2}] = 6), no simulation required.</li>
 </ul>
-<p>By exchanging sums, <span class="math display">\[
-  \sum_{i=1}^7 p_i
-  = \sum_{i=1}^7 \sum_{j=1}^7 \text{green}(i,j) \bmod 2
-  = \sum_{j=1}^7 \sum_{i=1}^7 \text{green}(i,j) \bmod 2
-  = \sum_{j=1}^7 q_j.
-\]</span></p>
-<p>Hence (r_8 = c_8). A single choice of ((8,8)), <span class="math display">\[
-  \text{cell}(8,8) = r_8 = c_8,
-\]</span> simultaneously fixes both final parities to even.</p>
-<hr>
-</section>
-<section id="counting-final-probability" class="level1">
-<h1>Counting &amp; Final Probability</h1>
-<ul>
-<li><strong>Green block</strong>: (2^{49}) arbitrary patterns.<br>
-</li>
-<li><strong>Blue strip</strong>: forced choices ((^7)).<br>
-</li>
-<li><strong>Red strip</strong>: forced choices ((^7)).<br>
-</li>
-<li><strong>Last cell</strong>: forced (()).</li>
-</ul>
-<p>Total valid boards: (2^{49}). Of the (2^{64}) total,<br>
-<span class="math display">\[
-\text{Probability} = \frac{2^{49}}{2^{64}} = 2^{-15} \approx 3.05\times10^{-5}.
-\]</span></p>
-<hr>
-</section>
-<section id="why-worry-about-blue-red-parities" class="level1">
-<h1>Why Worry About Blue &amp; Red Parities?</h1>
-<ul>
-<li><strong>Rows first, columns second</strong> is <em>not</em> symmetrical, so one might fear the two parity-fixing operations could clash.<br>
-</li>
-<li>The “swap-the-sum” identity guarantees they never clash: correcting rows with the blue strip automatically makes the <em>total</em> column parity defect equal to the <em>total</em> row parity defect, so a <em>single</em> marble can finish the job.</li>
-</ul>
-<p>In linear-algebra terms, the 8 row parities + 8 column parities give 16 constraints, but only 15 are independent. Once 15 are satisfied, the last follows automatically—this is why the lone corner cell can resolve both at once.</p>
-<hr>
-</section>
-<section id="final-answer" class="level1">
-<h1>Final Answer</h1>
-<p><strong>Probability</strong> that every row and column has an even number of white marbles:<br>
-<span class="math display">\[
-2^{-15}.
-\]</span></p>
 
 
 </section>
