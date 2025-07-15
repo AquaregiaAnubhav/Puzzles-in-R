@@ -14,7 +14,9 @@ website:
       - text: "Even–Marbles Puzzle"         
         href: Even_Marbles/index.html 
       - text: "Dice Roll Problem"         
-        href: Dice_Roll_LCM/index.html       
+        href: Dice_Roll_LCM/index.html
+      - text: "Average area-square of Random Triangles"         
+        href: Avg_triangle_area_on_a_lattice/index.html      
   page-navigation: false
 
 format:

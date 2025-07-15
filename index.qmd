@@ -9,4 +9,5 @@ format: html
 - [Direction Change Puzzle](Direction_Change_2/index.html)
 - [Even-Marbles Puzzle](Even_Marbles/index.html)
 - [10-faced Dice Roll](Dice_Roll_LCM/index.html)
+- [Average area-squared for Random Triangles](Avg_triangle_area_on_a_lattice/index.html)
 

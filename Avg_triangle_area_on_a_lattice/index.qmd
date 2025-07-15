@@ -1,0 +1,140 @@
+---
+title: "Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice"
+format: html
+author: "Anubhav Prakash"
+output-file: index.html
+---
+
+# 1 From lattice points to area — the Shoelace roadmap  
+
+~~~{mermaid}
+flowchart TD
+    A[Lattice<br/>point 1<br/>(x₁,y₁)] -->|choose 3 i.i.d.| B[Lattice<br/>point 2<br/>(x₂,y₂)]
+    B --> C[Lattice<br/>point 3<br/>(x₃,y₃)]
+    C --> D[Cross‑product<br/>(x₂−x₁)(y₃−y₁) − (x₃−x₁)(y₂−y₁)]
+    D --> E[Area A = |cross| ⁄ 2]
+    E --> F[A²]
+    F --> G[𝔼[A²] ← this paper]
+~~~
+
+For three independently and uniformly chosen lattice points  
+\[
+(x_1,y_1),\;(x_2,y_2),\;(x_3,y_3)\in\{0,1,2,3,4\}^2,
+\]
+the **Shoelace formula** gives the signed area
+
+\[
+A
+  \;=\;
+  \frac{(x_1y_2 + x_2y_3 + x_3y_1)\;-\;(y_1x_2 + y_2x_3 + y_3x_1)}{2}.
+\]
+
+Introduce the cross‑product
+
+\[
+C := (x_2\!-\!x_1)(y_3\!-\!y_1) - (x_3\!-\!x_1)(y_2\!-\!y_1),
+\qquad
+A = \frac{|C|}{2},\quad
+A^{2} = \frac{C^{2}}{4}.
+\]
+
+Hence  
+\[
+\boxed{\displaystyle
+  \mathbb E[A^{2}] \;=\; \frac{\mathbb E[C^{2}]}{4}}.
+\]
+
+---
+
+# 2 Moments of the coordinate variables  
+
+Each coordinate is an i.i.d. discrete‑uniform variable on  
+\(S=\{0,1,2,3,4\}\).
+
+## 2.1 First moments  
+
+\[
+\mathbb E[X] = \frac{0+1+2+3+4}{5} = 2,
+\qquad
+\mathbb E[Y] = 2.
+\]
+
+## 2.2 Second moments  
+
+\[
+\mathbb E[X^{2}]
+  =\frac{0^{2}+1^{2}+2^{2}+3^{2}+4^{2}}{5}
+  =\frac{30}{5}=6,
+\quad
+\mathbb E[Y^{2}] = 6.
+\]
+
+Thus  
+\(\operatorname{Var}(X)=\operatorname{Var}(Y)=6-2^{2}=2.\)
+
+---
+
+# 3 Computing \(\mathbb E[C^{2}]\)
+
+\[
+\begin{aligned}
+C
+  &= (x_2-x_1)(y_3-y_1) - (x_3-x_1)(y_2-y_1), \\[4pt]
+C^{2}
+  &= (x_2-x_1)^{2}(y_3-y_1)^{2}
+     + (x_3-x_1)^{2}(y_2-y_1)^{2} \\
+  &\quad\; - 2\,(x_2-x_1)(x_3-x_1)(y_2-y_1)(y_3-y_1).
+\end{aligned}
+\]
+
+Because all six variables are independent:
+
+* \(\mathbb E[(x_2 - x_1)^{2}] = \operatorname{Var}(X_2 - X_1)
+  = 2\,\operatorname{Var}(X) = 4\),  
+  and likewise for each squared coordinate difference;
+
+* Mixed expectations factor:
+
+\[
+\begin{aligned}
+\mathbb E[(x_2 - x_1)(x_3 - x_1)]
+  &= \mathbb E[x_2x_3] - 2\,\mathbb E[x_2x_1] + \mathbb E[x_1^{2}] \\
+  &= (2)(2) - 2(2)(2) + 6 = 2,
+\end{aligned}
+\]
+and \(\mathbb E[(y_2 - y_1)(y_3 - y_1)] = 2.\)
+
+Putting the pieces together:
+
+\[
+\mathbb E[C^{2}]
+  = 4\cdot4 \;+\; 4\cdot4 \;-\; 2\cdot 2 \cdot 2
+  = 16 + 16 - 8
+  = 24.
+\]
+
+---
+
+# 4 The expected square of the area  
+
+\[
+\boxed{\;
+  \mathbb E[A^{2}]
+  = \frac{\mathbb E[C^{2}]}{4}
+  = \frac{24}{4}
+  = 6
+\;}.
+\]
+
+So the average of the square of the area of a triangle formed by three
+uniformly selected points from the 5 × 5 lattice is **6**.
+
+---
+
+# 5 Key take‑aways  
+
+* **Shoelace formula** converts the area into a simple cross‑product.  
+* Independence and identical distributions reduce every mixed moment to
+  products of first and second moments.  
+* \(\mathbb E[C^{2}] = 24\) immediately yields \(\mathbb E[A^{2}] = 6\),
+  no simulation required.
