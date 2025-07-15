@@ -25,21 +25,21 @@
     "href": "Avg_triangle_area_on_a_lattice/index.html",
     "title": "Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice",
     "section": "",
-    "text": "flowchart TD\n    A[Lattice&lt;br/&gt;point 1&lt;br/&gt;(x₁,y₁)] --&gt;|choose 3 i.i.d.| B[Lattice&lt;br/&gt;point 2&lt;br/&gt;(x₂,y₂)]\n    B --&gt; C[Lattice&lt;br/&gt;point 3&lt;br/&gt;(x₃,y₃)]\n    C --&gt; D[Cross‑product&lt;br/&gt;(x₂−x₁)(y₃−y₁) − (x₃−x₁)(y₂−y₁)]\n    D --&gt; E[Area A = |cross| ⁄ 2]\n    E --&gt; F[A²]\n    F --&gt; G[𝔼[A²] ← this paper]\n\n\n\n\n\n\nFor three independently and uniformly chosen lattice points\n\\[\n(x_1,y_1),\\;(x_2,y_2),\\;(x_3,y_3)\\in\\{0,1,2,3,4\\}^2,\n\\] the Shoelace formula gives the signed area\n\\[\nA\n  \\;=\\;\n  \\frac{(x_1y_2 + x_2y_3 + x_3y_1)\\;-\\;(y_1x_2 + y_2x_3 + y_3x_1)}{2}.\n\\]\nIntroduce the cross‑product\n\\[\nC := (x_2\\!-\\!x_1)(y_3\\!-\\!y_1) - (x_3\\!-\\!x_1)(y_2\\!-\\!y_1),\n\\qquad\nA = \\frac{|C|}{2},\\quad\nA^{2} = \\frac{C^{2}}{4}.\n\\]\nHence\n\\[\n\\boxed{\\displaystyle\n  \\mathbb E[A^{2}] \\;=\\; \\frac{\\mathbb E[C^{2}]}{4}}.\n\\]"
+    "text": "For three independently and uniformly chosen lattice points\n\\[\n(x_1,y_1),\\;(x_2,y_2),\\;(x_3,y_3)\\in\\{0,1,2,3,4\\}^2,\n\\] the Shoelace formula gives the signed area\n\n\n\n\n\n\n\n\n\n\\[\nA\n  \\;=\\;\n  \\frac{(x_1y_2 + x_2y_3 + x_3y_1)\\;-\\;(y_1x_2 + y_2x_3 + y_3x_1)}{2}.\n\\]\nIntroduce the cross‑product\n\\[\nC := (x_2\\!-\\!x_1)(y_3\\!-\\!y_1) - (x_3\\!-\\!x_1)(y_2\\!-\\!y_1),\n\\qquad\nA = \\frac{|C|}{2},\\quad\nA^{2} = \\frac{C^{2}}{4}.\n\\]\nHence\n\\[\n\\boxed{\\displaystyle\n  \\mathbb E[A^{2}] \\;=\\; \\frac{\\mathbb E[C^{2}]}{4}}.\n\\]"
   },
   {
     "objectID": "Avg_triangle_area_on_a_lattice/index.html#first-moments",
     "href": "Avg_triangle_area_on_a_lattice/index.html#first-moments",
     "title": "Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice",
-    "section": "2.1 First moments",
-    "text": "2.1 First moments\n\\[\n\\mathbb E[X] = \\frac{0+1+2+3+4}{5} = 2,\n\\qquad\n\\mathbb E[Y] = 2.\n\\]"
+    "section": "2.1. First moments",
+    "text": "2.1. First moments\n\\[\n\\mathbb E[X] = \\frac{0+1+2+3+4}{5} = 2,\n\\qquad\n\\mathbb E[Y] = 2.\n\\]"
   },
   {
     "objectID": "Avg_triangle_area_on_a_lattice/index.html#second-moments",
     "href": "Avg_triangle_area_on_a_lattice/index.html#second-moments",
     "title": "Expected Square of the Area of a Random Triangle in a 5 × 5 Lattice",
-    "section": "2.2 Second moments",
-    "text": "2.2 Second moments\n\\[\n\\mathbb E[X^{2}]\n  =\\frac{0^{2}+1^{2}+2^{2}+3^{2}+4^{2}}{5}\n  =\\frac{30}{5}=6,\n\\quad\n\\mathbb E[Y^{2}] = 6.\n\\]\nThus\n\\(\\operatorname{Var}(X)=\\operatorname{Var}(Y)=6-2^{2}=2.\\)"
+    "section": "2.2. Second moments",
+    "text": "2.2. Second moments\n\\[\n\\mathbb E[X^{2}]\n  =\\frac{0^{2}+1^{2}+2^{2}+3^{2}+4^{2}}{5}\n  =\\frac{30}{5}=6,\n\\quad\n\\mathbb E[Y^{2}] = 6.\n\\]"
   },
   {
     "objectID": "Dice_Roll_LCM/index.html",
