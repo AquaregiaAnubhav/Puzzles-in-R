@@ -122,3 +122,5 @@ So the average of the square of the area of a triangle formed by three
 uniformly selected points from the 5 × 5 lattice is **6**.
 
 ---
+
+**R simulation of this problem:** [Github](https://github.com/AquaregiaAnubhav/Puzzles-in-R/tree/main/Avg_triangle_area_on_a_lattice)
