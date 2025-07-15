@@ -1,9 +1,7 @@
 # Expected Square of the Area of a Random Triangle on 5 × 5‑Lattice 
 
 Choose three lattice points  
-$
-(x_1,y_1),\;(x_2,y_2),\;(x_3,y_3)\in \{0,1,2,3,4\}^2
-$
+$(x_1,y_1), \ (x_2,y_2), \ (x_3,y_3) \ in \ {0,1,2,3,4}^2$
 **independently and uniformly at random.**
 
 **Question:**  
