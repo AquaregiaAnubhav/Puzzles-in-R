@@ -68,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -182,66 +185,114 @@ window.Quarto = {
 </header>
 
 
-<section id="from-lattice-points-to-area-the-shoelace-roadmap" class="level1">
-<h1>1 From lattice points to area&nbsp;— the Shoelace roadmap</h1>
-<p>~<del>{mermaid} flowchart TD A[Lattice<br>point&nbsp;1<br>(x₁,y₁)] –&gt;|choose 3&nbsp;i.i.d.| B[Lattice<br>point&nbsp;2<br>(x₂,y₂)] B –&gt; C[Lattice<br>point&nbsp;3<br>(x₃,y₃)] C –&gt; D[Cross‑product<br>(x₂−x₁)(y₃−y₁) − (x₃−x₁)(y₂−y₁)] D –&gt; E[Area&nbsp;A&nbsp;=&nbsp;|cross| ⁄ 2] E –&gt; F[A²] F –&gt; G[𝔼[A²]&nbsp;←&nbsp;this&nbsp;paper]</del>~</p>
+<section id="from-lattice-points-to-area---the-shoelace-roadmap" class="level1">
+<h1>1 From lattice points to area&nbsp;- the Shoelace roadmap</h1>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Lattice&lt;br/&gt;point&nbsp;1&lt;br/&gt;(x₁,y₁)] --&gt;|choose 3&nbsp;i.i.d.| B[Lattice&lt;br/&gt;point&nbsp;2&lt;br/&gt;(x₂,y₂)]
+    B --&gt; C[Lattice&lt;br/&gt;point&nbsp;3&lt;br/&gt;(x₃,y₃)]
+    C --&gt; D[Cross‑product&lt;br/&gt;(x₂−x₁)(y₃−y₁) − (x₃−x₁)(y₂−y₁)]
+    D --&gt; E[Area&nbsp;A&nbsp;=&nbsp;|cross| ⁄ 2]
+    E --&gt; F[A²]
+    F --&gt; G[𝔼[A²]&nbsp;←&nbsp;this&nbsp;paper]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>For three independently and uniformly chosen lattice points<br>
-[ (x_1,y_1),;(x_2,y_2),;(x_3,y_3){0,1,2,3,4}^2, ] the <strong>Shoelace formula</strong> gives the signed area</p>
-<p>[ A ;=; . ]</p>
+<span class="math display">\[
+(x_1,y_1),\;(x_2,y_2),\;(x_3,y_3)\in\{0,1,2,3,4\}^2,
+\]</span> the <strong>Shoelace formula</strong> gives the signed area</p>
+<p><span class="math display">\[
+A
+  \;=\;
+  \frac{(x_1y_2 + x_2y_3 + x_3y_1)\;-\;(y_1x_2 + y_2x_3 + y_3x_1)}{2}.
+\]</span></p>
 <p>Introduce the cross‑product</p>
-<p>[ C := (x_2!-!x_1)(y_3!-!y_1) - (x_3!-!x_1)(y_2!-!y_1), A = , A^{2} = . ]</p>
+<p><span class="math display">\[
+C := (x_2\!-\!x_1)(y_3\!-\!y_1) - (x_3\!-\!x_1)(y_2\!-\!y_1),
+\qquad
+A = \frac{|C|}{2},\quad
+A^{2} = \frac{C^{2}}{4}.
+\]</span></p>
 <p>Hence<br>
-[ . ]</p>
+<span class="math display">\[
+\boxed{\displaystyle
+  \mathbb E[A^{2}] \;=\; \frac{\mathbb E[C^{2}]}{4}}.
+\]</span></p>
 <hr>
 </section>
 <section id="moments-of-the-coordinate-variables" class="level1">
 <h1>2 Moments of the coordinate variables</h1>
 <p>Each coordinate is an i.i.d. discrete‑uniform variable on<br>
-(S={0,1,2,3,4}).</p>
+<span class="math inline">\(S=\{0,1,2,3,4\}\)</span>.</p>
 <section id="first-moments" class="level2">
 <h2 class="anchored" data-anchor-id="first-moments">2.1 First moments</h2>
-<p>[ E[X] = = 2, E[Y] = 2. ]</p>
+<p><span class="math display">\[
+\mathbb E[X] = \frac{0+1+2+3+4}{5} = 2,
+\qquad
+\mathbb E[Y] = 2.
+\]</span></p>
 </section>
 <section id="second-moments" class="level2">
 <h2 class="anchored" data-anchor-id="second-moments">2.2 Second moments</h2>
-<p>[ E[X^{2}] = ==6, E[Y^{2}] = 6. ]</p>
+<p><span class="math display">\[
+\mathbb E[X^{2}]
+  =\frac{0^{2}+1^{2}+2^{2}+3^{2}+4^{2}}{5}
+  =\frac{30}{5}=6,
+\quad
+\mathbb E[Y^{2}] = 6.
+\]</span></p>
 <p>Thus<br>
-((X)=(Y)=6-2^{2}=2.)</p>
+<span class="math inline">\(\operatorname{Var}(X)=\operatorname{Var}(Y)=6-2^{2}=2.\)</span></p>
 <hr>
 </section>
 </section>
-<section id="computing-ec2" class="level1">
-<h1>3 Computing (E[C^{2}])</h1>
-[
-<span class="math display">\[\begin{aligned}
+<section id="computing-mathbb-ec2" class="level1">
+<h1>3 Computing <span class="math inline">\(\mathbb E[C^{2}]\)</span></h1>
+<p><span class="math display">\[
+\begin{aligned}
 C
-  &amp;= (x_2-x_1)(y_3-y_1) - (x_3-x_1)(y_2-y_1), \\[4pt]
-C^{2}
-  &amp;= (x_2-x_1)^{2}(y_3-y_1)^{2}
-     + (x_3-x_1)^{2}(y_2-y_1)^{2} \\
-  &amp;\quad\; - 2\,(x_2-x_1)(x_3-x_1)(y_2-y_1)(y_3-y_1).
-\end{aligned}\]</span>
-<p>]</p>
+  &amp;= (x_2-x_1)(y_3-y_1) - (x_3-x_1)(y_2-y_1), \\]</span>4pt] C^{2} &amp;= (x_2-x_1)<sup>{2}(y_3-y_1)</sup>{2} + (x_3-x_1)<sup>{2}(y_2-y_1)</sup>{2} \ &amp;; - 2,(x_2-x_1)(x_3-x_1)(y_2-y_1)(y_3-y_1). \end{aligned} $$</p>
 <p>Because all six variables are independent:</p>
 <ul>
-<li><p>(E[(x_2 - x_1)^{2}] = (X_2 - X_1) = 2,(X) = 4),<br>
+<li><p><span class="math inline">\(\mathbb E[(x_2 - x_1)^{2}] = \operatorname{Var}(X_2 - X_1)
+= 2\,\operatorname{Var}(X) = 4\)</span>,<br>
 and likewise for each squared coordinate difference;</p></li>
 <li><p>Mixed expectations factor:</p></li>
 </ul>
-[
-<span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+\begin{aligned}
 \mathbb E[(x_2 - x_1)(x_3 - x_1)]
   &amp;= \mathbb E[x_2x_3] - 2\,\mathbb E[x_2x_1] + \mathbb E[x_1^{2}] \\
   &amp;= (2)(2) - 2(2)(2) + 6 = 2,
-\end{aligned}\]</span>
-<p>] and (E[(y_2 - y_1)(y_3 - y_1)] = 2.)</p>
+\end{aligned}
+\]</span> and <span class="math inline">\(\mathbb E[(y_2 - y_1)(y_3 - y_1)] = 2.\)</span></p>
 <p>Putting the pieces together:</p>
-<p>[ E[C^{2}] = 4 ;+; 4 ;-; 2 = 16 + 16 - 8 = 24. ]</p>
+<p><span class="math display">\[
+\mathbb E[C^{2}]
+  = 4\cdot4 \;+\; 4\cdot4 \;-\; 2\cdot 2 \cdot 2
+  = 16 + 16 - 8
+  = 24.
+\]</span></p>
 <hr>
 </section>
 <section id="the-expected-square-of-the-area" class="level1">
 <h1>4 The expected square of the area</h1>
-<p>[ . ]</p>
+<p><span class="math display">\[
+\boxed{\;
+  \mathbb E[A^{2}]
+  = \frac{\mathbb E[C^{2}]}{4}
+  = \frac{24}{4}
+  = 6
+\;}.
+\]</span></p>
 <p>So the average of the square of the area of a triangle formed by three uniformly selected points from the 5 × 5 lattice is <strong>6</strong>.</p>
 <hr>
 </section>
@@ -252,7 +303,7 @@ and likewise for each squared coordinate difference;</p></li>
 </li>
 <li>Independence and identical distributions reduce every mixed moment to products of first and second moments.<br>
 </li>
-<li>(E[C^{2}] = 24) immediately yields (E[A^{2}] = 6), no simulation required.</li>
+<li><span class="math inline">\(\mathbb E[C^{2}] = 24\)</span> immediately yields <span class="math inline">\(\mathbb E[A^{2}] = 6\)</span>, no simulation required.</li>
 </ul>
 
 
